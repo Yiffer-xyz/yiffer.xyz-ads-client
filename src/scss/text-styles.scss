@@ -129,14 +129,12 @@ ul {
   font-weight: 400 !important;
 }
 
-.yifferTitle {
+.yifferTitle, .coloredYifferTitle {
   font-size: 4.25rem;
   font-family: 'Shrikhand', cursive;
-  margin-bottom: -10px;
-  margin-top: 0;
-  padding-top: 0;
-  padding-bottom: 1.5rem;
   color: $themeText !important;
+  margin: 1.5rem auto;
+  display: block;
   @media screen and (max-width: 900px) {
     font-size: 3rem;
   }
@@ -144,26 +142,15 @@ ul {
     font-size: 2.75rem;
   }
 }
+
 .coloredYifferTitle {
-  font-size: 4.25rem;
-  font-family: 'Shrikhand', cursive;
-  margin-bottom: -10px;
-  margin-top: 0;
-  padding-top: 0;
-  padding-bottom: 1.5rem;
+  color: transparent !important;
   background-image: -webkit-gradient(
     linear, left top, right top, 
     color-stop(0.2, $themeGreen1Dark),
     color-stop(0.8, $themeGreen2Dark)
   );
-  color: transparent;
   background-clip: text;
-  @media screen and (max-width: 900px) {
-    font-size: 3rem;
-  }
-  @media screen and (max-width: 500px) {
-    font-size: 2.5rem;
-  }
 }
 
 .smallYifferTitleLink {
@@ -255,15 +242,6 @@ label {
   @extend .mono;
   background-color: $themeRed4;
   border-color: $themeRed;
-}
-
-.modal-header {
-  font-size: 28px;
-  font-weight: 400;
-
-  @media (max-width: 900px) {
-    font-size: 25px;
-  }
 }
 
 .icons-and-numbers-row {

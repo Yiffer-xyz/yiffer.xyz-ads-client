@@ -3,34 +3,33 @@
     <nav>
       <div class="navInner">
         <div class="navLeft">
-          <router-link 
-            :to="{ name: 'comicList' }"
-            v-if="$breakpoint.xs"
-            class="navlink">
-            <HomeIcon/>
-          </router-link>
-          <span v-else
-                class="smallYifferTitle"
+          <span class="smallYifferTitle"
                 style="padding: 0 1rem 0 0.5rem;">
-            <router-link 
-              :to="{ name: 'comicList' }"
+            <a 
+              href="https://yiffer.xyz"
               :class="{'coloredSmallYifferTitle': isDarkTheme && this.$route.path !== '/'}"
               class="shrikhand smallYifferTitleLink">
-              Yiffer.xyz
-            </router-link>
+              {{$breakpoint.smAndDown ? 'Y' : 'Yiffer.xyz'}}
+            </a>
           </span>
+
+          <router-link 
+            class="navlink"
+            :to="{ name: 'landingPage' }">
+            {{$breakpoint.smAndDown ? 'Ads' : 'Advertising'}}
+          </router-link>
 
           <router-link 
             v-if="$store.getters.isAuthenticated"
             class="navlink"
-            :to="{ name: 'account' }">
-            Account
+            :to="{ name: 'dashboard' }">
+            {{$breakpoint.xs ? 'Dash' : 'Dashboard'}}
           </router-link>
 
           <router-link 
             v-if="!$store.getters.isAuthenticated"
             class="navlink"
-            :to="{ name: 'account' }">
+            :to="{ name: 'login' }">
             Log in
           </router-link>
 
@@ -186,9 +185,6 @@ nav {
   background: linear-gradient(to right, $themeGreen1, $themeGreen2);
   width: 100%;
   box-shadow: 0 0px 5px #0000001a;
-  span {
-    margin-bottom: 1px;
-  }
 }
 
 .navInner {
@@ -225,6 +221,9 @@ nav {
   &:hover {
     cursor: pointer;
     color: $themeBlueDarker;
+  }
+  span {
+    margin-bottom: -1px;
   }
 }
 
@@ -284,7 +283,7 @@ nav {
     border-style: solid;
     border-width: 0;
     border-top-width: 4px;
-    border-image: linear-gradient(left, $themeGreen1, $themeGreen2) 1; 
+    border-image: linear-gradient(to left, $themeGreen1, $themeGreen2) 1; 
     background: $themeDark4;
     p {
       color: white;
