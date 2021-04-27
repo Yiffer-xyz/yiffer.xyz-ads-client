@@ -154,7 +154,7 @@ import adApi from '../api/advertisingApi'
 
 import CheckIcon from 'vue-material-design-icons/CheckCircle.vue'
 import { mapGetters } from 'vuex'
-import { doFetch, fetchClear } from '../utils/statefulFetch'
+import { doFetch, fetchClear } from '@/utils/statefulFetch'
 
 export default {
   name: 'advertisingApply',
@@ -226,7 +226,9 @@ export default {
   mounted () {
     miscApi.logRoute('advertising apply')
 
-    doFetch(this.$store.commit, 'paidImagePrices', adApi.getAdPrices())
+    if (!this.paidImagePrices.fetched) {
+      doFetch(this.$store.commit, 'paidImagePrices', adApi.getAdPrices())
+    }
   },
 
   beforeDestroy () {

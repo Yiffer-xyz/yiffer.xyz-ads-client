@@ -188,14 +188,43 @@ $buttonBorderWidth: 2px;
 }
 
 .pretty-input-upload {
+  @include simpleShadowSmallBtn;
+  outline: none;
+  border-radius: 4px;
+  font-family: 'Mulish', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  background-color: $themeBlueDark;
+  color: white;
+  border: 2px solid $themeBlueDark;
+  width: 12rem;
+  word-break: keep-all;
+  transition: background-color 100ms, border-color 100ms, box-shadow 100ms;
+  padding: 4px 0;
   position: relative;
 
-  border-radius: 5px;
-  background: $themeGray7;
-  padding: 5px 10px;
-
   display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
   align-items: center;
+
+  &:hover, &:focus {
+    background-color: $themeBlueDarker;
+    border-color: $themeBlueDarker;
+  }
+
+  p:hover {
+    cursor: default;
+  }
+
+  span {
+    color: white;
+  }
+
+  input {
+    width: 12rem;
+  }
 
   p {
     font-size: 14px;
@@ -323,10 +352,18 @@ $buttonBorderWidth: 2px;
   }
 
   .pretty-input-upload {
-    background: $themeDark1;
+    background: transparent !important;
+    border-color: $themeBlueDTDarker;
+
+    svg, span, p {
+      color: #eee;
+    }
 
     &:hover, &:focus {
       background-color: $themeDark2;
+      background: $themeBlueDT !important;
+      border-color: $themeBlueDT !important;
+
     }
   }
 

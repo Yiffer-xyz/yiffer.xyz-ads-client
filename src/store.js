@@ -73,22 +73,11 @@ const store = {
 }
 
 registerFetchNames(store, 
-  {name: 'allKeywords', defaultValue: []},
-  {name: 'allComics', defaultValue: []},
-  {name: 'feedback', defaultValue: []},
   {name: 'myPaidImages', defaultValue: []},
-  {name: 'blogs', defaultValue: []},
-  {name: 'submitFeedback', defaultValue: {}},
-  {name: 'modApplicationSubmit', defaultValue: {}},
-  {name: 'comicSuggestionSubmit', defaultValue: {}},
-  {name: 'changePasswordSubmit', defaultValue: {}},
-  {name: 'addEmailSubmit', defaultValue: {}},
-  {name: 'forgottenPasswordSubmit', defaultValue: {}},
-  {name: 'resetPasswordSubmit', defaultValue: {}},
   {name: 'advertisingApplySubmit', defaultValue: {}},
   {name: 'fetchLogin', defaultValue: {}},
-  {name: 'fetchSignup', defaultValue: {}},
   {name: 'paidImagePrices', defaultValue: []},
+  {name: 'paidImagePayments', defaultValue: []},
 )
 
 export default new Vuex.Store(store)

@@ -30,24 +30,18 @@ export default {
     return response.data
   },
 
-  async updateAd ({id, price, status, activationDate, deactivationDate, adminNotes, correctionNote}) {
-    let response = await axios.post(`${baseUrl}/paid-images/${id}`, {
-      price, status, activationDate, deactivationDate, adminNotes, correctionNote,
-    })
-    if (!response.data.error) { return response.data }
-    else { return {success: false, message: response.data.error} }
-  },
-
-  async updateAdNeedingCorrection (id, link, mainText, secondaryText, file) {
+  async updateAd (id, adName, link, mainText, secondaryText, file1, file2) {
     let formData = new FormData()
     formData.append('link', link)
+    formData.append('adName', adName)
     if (mainText) { formData.append('mainText', mainText) }
     if (secondaryText) { formData.append('secondaryText', secondaryText) }
-    if (file) { formData.append('file', file) }
+    if (file1) { formData.append('file1', file1) }
+    if (file2) { formData.append('file2', file2) }
 
     try {
       let response = await axios.post(
-        `${baseUrl}/paid-images/${id}/correct`,
+        `${baseUrl}/paid-images/${id}/update-user`,
         formData,
         {
           headers: {'Content-Type': 'multipart/form-data'},
@@ -87,6 +81,13 @@ export default {
     }
   },
 
+  async getAdPayments (adId) {
+    return [
+      {date: '2021-04-03 13:13:22', amount: 20},
+      {date: '2021-02-13 22:22:22', amount: 60},
+    ]
+  },
+
   async toggleRenewal (adId, shouldRenew) {
     try {
       let response = await axios.post(`${baseUrl}/paid-images/${adId}/toggle-renew`, {shouldRenew})
@@ -106,16 +107,6 @@ export default {
   async deleteOrDeactivateAd (adId) {
     try {
       await axios.delete(`${baseUrl}/paid-images/${adId}`)
-      return {success: true}
-    }
-    catch (err) {
-      return {success: false, message: err.response.data}
-    }
-  },
-
-  async reactivateAd (adId) {
-    try {
-      await axios.post(`${baseUrl}/paid-images/${adId}/reactivate`)
       return {success: true}
     }
     catch (err) {

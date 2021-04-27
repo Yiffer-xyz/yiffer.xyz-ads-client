@@ -2,7 +2,7 @@ import Vue from 'vue'
 import store from '@/store.js'
 import Router from 'vue-router'
 import LandingPage from '@/pages/LandingPage.vue'
-import Dashboard from '@/pages/Dashboard.vue'
+import Dashboard from '@/pages/dashboard/Dashboard.vue'
 import ApplicationForm from '@/pages/ApplicationForm.vue'
 import Login from '@/pages/Login.vue'
 
