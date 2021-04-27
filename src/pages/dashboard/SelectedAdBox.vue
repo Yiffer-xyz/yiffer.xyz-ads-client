@@ -251,17 +251,25 @@
           Detailed payment instructions at the top of the page.
         </p>
 
-        <p class="mb-0" v-if="paidImagePayments.payload.length > 0">
-          <b>Your payments</b>
-        </p>
-        <ul v-if="paidImagePayments.payload.length > 0">
-          <li v-for="payment in paidImagePayments.payload" :key="payment.date">
-            ${{payment.amount}}, registered {{formatTimestamp(payment.date)}}
-          </li>
-        </ul>
+        <Loading v-if="paidImagePayments.fetching" text="Fetching your payments"/>
 
-        <p v-if="paidImagePayments.payload.length === 0 && paidImagePayments.fetched">
+        <span v-if="paidImagePayments.fetched && paidImagePayments.payload.length > 0">
+          <p class="mb-0" v-if="paidImagePayments.payload.length > 0">
+            <b>Your payments</b>
+          </p>
+          <ul v-if="paidImagePayments.payload.length > 0">
+            <li v-for="payment in paidImagePayments.payload" :key="payment.id" style="font-size: 0.9rem;">
+              ${{payment.amount}}, registered {{formatTimestamp(payment.date)}}
+            </li>
+          </ul>
+        </span>
+
+        <p v-else-if="paidImagePayments.payload.length === 0 && paidImagePayments.fetched">
           We have not registered any payments for this ad yet.
+        </p>
+
+        <p v-else-if="paidImagePayments.failed">
+          There was an error fetching your payments for this ad.
         </p>
 
         <!-- HR LINE -->
@@ -269,15 +277,24 @@
 
         <!-- STATS -->
         <p>
-          <b>Stats</b>
+          <b>Click stats</b>
         </p>
 
-        <div v-if="adTypesWithClicks.includes(ad.status)">
-          Graph here TODO
-        </div>
+        <Loading v-if="paidImageClickStats.fetching" text="Fetching stats"/>
 
-        <p v-else>
-          Once your ad has been activated, you will see a graph showing clicks per day here.
+        <span v-else-if="paidImageClickStats.fetched">
+          <p v-if="paidImageClickStats.payload.length <= 1" style="margin-top: -8px;">
+            No daily click stats yet. Click stats are calculated at midnight, GMT +0. When your ad has been active for two days, a graph will appear here.
+          </p>
+
+          <ClickStats v-else-if="!!chartData"
+                      :key="isDarkTheme"
+                      :chartData="chartData"
+                      :fontColor="isDarkTheme ? '#eee' : '#333'"/>
+        </span>
+        
+        <p v-else-if="paidImageClickStats.failed">
+          There was an error fetching click stats for this ad.
         </p>
       </span>
     </span>
@@ -289,20 +306,51 @@ import ResponseMessage from '@/components/ResponseMessage.vue'
 import TextInput from '@/components/TextInput.vue'
 import LoadingButton from '@/components/LoadingButton.vue'
 import CheckIcon from 'vue-material-design-icons/CheckCircle.vue'
+import ClickStats from './ClickStats.vue'
 import { mapGetters } from 'vuex'
 import { format } from 'date-fns'
 import { doFetch } from '@/utils/statefulFetch'
+import Loading from '@/components/LoadingIndicator.vue'
 
 import config from '@/config.json'
 import advertisingApi from '@/api/advertisingApi'
 
 export default {
   components: {
-    CheckIcon, ResponseMessage, TextInput, LoadingButton,
+    CheckIcon, ResponseMessage, TextInput, LoadingButton, ClickStats, Loading,
   },
 
   computed: {
-    ...mapGetters(['myPaidImages', 'paidImagePrices', 'paidImagePayments']),
+    ...mapGetters([
+      'myPaidImages', 'paidImagePrices', 'paidImagePayments', 'paidImageClickStats', 'isDarkTheme',
+    ]),
+
+    chartData () {
+      if (this.paidImageClickStats.fetched && this.paidImageClickStats.payload.length > 0) {
+        let chartDataObj = {
+          labels: [],
+          datasets: [
+            {
+              label: 'Clicks',
+              backgroundColor: "#9aebe744",
+              strokeColor: '#08ccc2',
+              borderColor: '#49ded7',
+              color: '#08ccc2',
+              data: [],
+            }
+          ]
+        }
+
+        this.paidImageClickStats.payload.forEach(clicksAndDate => {
+          chartDataObj.datasets[0].data.push(clicksAndDate.clicks)
+          chartDataObj.labels.push(clicksAndDate.date)
+        })
+        
+        return chartDataObj
+      }
+
+      return null
+    },
 
     isEditingOrDeleting () {
       return this.isEditingAd || this.isDeletingAd
@@ -389,11 +437,13 @@ export default {
     if (!this.paidImagePrices.fetched) {
       doFetch(this.$store.commit, 'paidImagePrices', advertisingApi.getAdPrices())
     }
+    doFetch(this.$store.commit, 'paidImageClickStats', advertisingApi.getAdClickStats(this.ad.id))
   },
 
   watch: {
     ad () {
       this.resetAllEdits()
+      doFetch(this.$store.commit, 'paidImageClickStats', advertisingApi.getAdClickStats(this.ad.id))
     }
   },
 

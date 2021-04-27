@@ -1,5 +1,6 @@
 import axios from 'axios'
 import config from '@/config.json'
+import { format } from 'date-fns'
 let baseUrl = config.apiBaseUrl
 
 export default {
@@ -55,6 +56,14 @@ export default {
     }
   },
 
+  async getAdClickStats (adId) {
+    let response = await axios.get(`${baseUrl}/paid-images/${adId}/click-stats`)
+    return response.data.map(clickAndDate => ({
+      clicks: clickAndDate.clicks,
+      date: format(new Date(clickAndDate.date.substr(0,10)), 'MMM d'),
+    }))
+  },
+
   async getAdsByStatuses (statuses) {
     let params = new URLSearchParams()
     statuses.forEach(status => params.append('statuses', status))
@@ -82,10 +91,8 @@ export default {
   },
 
   async getAdPayments (adId) {
-    return [
-      {date: '2021-04-03 13:13:22', amount: 20},
-      {date: '2021-02-13 22:22:22', amount: 60},
-    ]
+    let response = await axios.get(`${baseUrl}/paid-images/${adId}/payments`)
+    return response.data
   },
 
   async toggleRenewal (adId, shouldRenew) {

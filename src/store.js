@@ -78,6 +78,7 @@ registerFetchNames(store,
   {name: 'fetchLogin', defaultValue: {}},
   {name: 'paidImagePrices', defaultValue: []},
   {name: 'paidImagePayments', defaultValue: []},
+  {name: 'paidImageClickStats', defaultValue: []},
 )
 
 export default new Vuex.Store(store)
