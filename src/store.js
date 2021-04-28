@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { registerFetchNames, doFetch, doFetchSilent } from './utils/statefulFetch'
+import { registerFetchNames } from './utils/statefulFetch'
 import authApi from '@/api/authApi'
 
 Vue.use(Vuex)
