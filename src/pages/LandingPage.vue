@@ -67,12 +67,18 @@
           <p class="adMiniHeader">
             Prices
           </p>
-          <p>
-            2 months: <b>$20 per month ($10 now!)</b>
+
+          <p v-if="!paidImagePrices.fetched">
+            Fetching prices...
           </p>
-          <p>
-            4 months: <b>$14 per month ($7 now!)</b>
-          </p>
+          <span v-else>
+            <p v-for="price in paidImagePrices.payload.card" :key="price.durationMonths">
+              {{price.durationMonths}} months: <b>${{price.price/price.durationMonths}} per month</b>
+              <b v-if="price.discountedPrice">
+                {{`(discounted: $${price.discountedPrice/price.durationMonths} now!)`}}
+              </b>
+            </p>
+          </span>
 
           
           <p class="adMiniHeader">
@@ -120,13 +126,18 @@
           <p class="adMiniHeader">
             Prices
           </p>
-          <p>
-            2 months: <b>$35 per month ($17 now!)</b>
-          </p>
-          <p>
-            4 months: <b>$25 per month ($12 now!)</b>
-          </p>
 
+          <p v-if="!paidImagePrices.fetched">
+            Fetching prices...
+          </p>
+          <span v-else>
+            <p v-for="price in paidImagePrices.payload.banner" :key="price.durationMonths">
+              {{price.durationMonths}} months: <b>${{price.price/price.durationMonths}} per month</b>
+              <b v-if="price.discountedPrice">
+                {{`(discounted: $${price.discountedPrice/price.durationMonths} now!)`}}
+              </b>
+            </p>
+          </span>
           
           <p class="adMiniHeader">
             Details
@@ -206,6 +217,8 @@
 
 <script>
 import miscApi from '@/api/miscApi'
+import adApi from '@/api/advertisingApi'
+import { doFetch } from '@/utils/statefulFetch'
 
 import RightArrow from 'vue-material-design-icons/ArrowRight.vue'
 import { mapGetters } from 'vuex'
@@ -219,7 +232,7 @@ export default {
 
   computed: {
     ...mapGetters([
-      'isDarkTheme', 'isAuthenticated',
+      'isDarkTheme', 'isAuthenticated', 'paidImagePrices',
     ]),
   },
 
@@ -231,6 +244,9 @@ export default {
 
   mounted () {
     miscApi.logRoute('advertising')
+    if (!this.paidImagePrices.fetched) {
+      doFetch(this.$store.commit, 'paidImagePrices', adApi.getAdPrices())
+    }
   },
 
   methods: {
