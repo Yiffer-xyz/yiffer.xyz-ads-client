@@ -50,13 +50,6 @@ export default {
     ResponseMessage, LoadingButton, TextInput,
   },
 
-  props: {
-    closeModal: {
-      type: Function,
-      required: true,
-    },
-  },
-
   computed: {
     ...mapGetters(['fetchLogin'])
   },
@@ -70,10 +63,6 @@ export default {
   },
 
   methods: {
-    setModalContext (modalContext) {
-      this.$store.commit('setLoginModalContext', modalContext)
-    },
-
     async submitLogin () {
       await doFetch(this.$store.commit, 'fetchLogin', 
         authApi.login(this.loginUsername, this.loginPassword))
