@@ -593,17 +593,17 @@ export default {
     },
 
     getAdStatusClass (status) {
-      if (['PENDING', 'ACTIVE BUT PENDING'].includes(status)) {
-        return 'mono monoInfo'
+      if ([adStatuses.pending, adStatuses.activeButPending].includes(status)) {
+        return 'monoInfo'
       }
-      else if (['NEEDS CORRECTION', 'AWAITING PAYMENT', 'ACTIVE BUT NEEDS CORR. '].includes(status)) {
-        return 'mono monoWarning'
+      else if ([adStatuses.needsCorrection, adStatuses.awaitingPayment, adStatuses.activeNeedsCorrection].includes(status)) {
+        return 'monoWarning'
       }
-      else if (status === 'ENDED') {
-        return 'mono monoError'
+      else if ([adStatuses.ended, adStatuses.cancelled].includes(status)) {
+        return 'monoError'
       }
       else {
-        return 'mono monoSuccess'
+        return 'monoSuccess'
       }
     },
 
@@ -617,6 +617,17 @@ export default {
       return queryString
     },
   }
+}
+
+const adStatuses = {
+  pending: 'PENDING',
+  needsCorrection: 'NEEDS CORRECTION',
+  awaitingPayment: 'AWAITING PAYMENT',
+  active: 'ACTIVE',
+  activeButPending: 'ACTIVE BUT PENDING',
+  activeNeedsCorrection: 'ACTIVE BUT NEEDS CORR.',
+  ended: 'ENDED',
+  cancelled: 'CANCELLED',
 }
 </script>
 
