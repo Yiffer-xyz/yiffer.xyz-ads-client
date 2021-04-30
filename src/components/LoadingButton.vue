@@ -100,6 +100,7 @@ $buttonBorderWidth: 2px;
 }
 .yButtonDisabled {
   opacity: 0.6;
+  filter: saturate(30%);
   box-shadow: none;
   &:hover {
     box-shadow: none;

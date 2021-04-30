@@ -24,16 +24,17 @@
     </div>
 
     <Form :buttonText="'Submit for approval'"
-          :canSubmit="isReadyForSubmit"
-          :errorText="advertisingApplySubmit.errorMessage"
+          :canSubmit="!disableSubmit"
+          :errorText="submitMissingFieldsMsg"
           :fetchingText="'Submitting...'"
           :fetchState="advertisingApplySubmit"
           :header="'Advertiser application form'"
           :successText="'Success! See your ad dashboard for details.'"
           :hideSubmit="!adType"
           maxWidth="420"
-          @submit="submitApplication">
-          
+          @submit="submitApplication"
+          @closeMessage="submitMissingFieldsMsg = null">
+
       <TextInput :value="adLink"
                  @change="newVal => adLink = newVal"
                  title="Link (where the users end up when clicking your ad)"
@@ -168,6 +169,22 @@ export default {
       'advertisingApplySubmit', 'isDarkTheme', 'paidImagePrices',
     ]),
 
+    disableSubmit () {
+      if (this.isCardAd) {
+        if (this.remainingCharsMainText<0 || this.remainingCharsSecondaryText<0
+          || this.fileErrorMessageCard1 || this.fileErrorMessageCard2) {
+            return true
+        }
+      }
+      else {
+        if (this.fileErrorMessageBanner) {
+          return true
+        }
+      }
+
+      return false
+    },
+
     isCardAd () {
       return this.adType === 'card'
     },
@@ -201,26 +218,6 @@ export default {
         return `${'$'+price/durationMonths}/month for a duration of ${durationMonths} months (${'$'+price} total)`
       })
     },
-
-    isReadyForSubmit () {
-      if (!this.adType || !this.adLink || this.isAwaitingResponse || !this.adName) {
-        return false
-      }
-      if (this.isCardAd) {
-        if (!this.adMainText || this.remainingCharsMainText<0 || this.remainingCharsSecondaryText<0
-          || !this.fileCard1 || !this.fileCard2 || this.fileErrorMessageCard1 
-          || this.fileErrorMessageCard2) {
-          return false
-        }
-      }
-      else {
-        if (!this.fileBanner || this.fileErrorMessageBanner) {
-          return false
-        }
-      }
-
-      return true
-    },
   },
 
   mounted () {
@@ -252,6 +249,7 @@ export default {
       isAwaitingResponse: false,
       success: false,
       responseMessage: '',
+      submitMissingFieldsMsg: '',
     }
   },
 
@@ -263,7 +261,14 @@ export default {
 
   methods: {
     async submitApplication () {
-      if (!this.isReadyForSubmit) { return }
+      if (this.isAwaitingResponse) { return }
+
+      let missingFieldsMsg = this.getSubmitFieldsErrorMessage()
+      if (missingFieldsMsg) {
+        this.submitMissingFieldsMsg = missingFieldsMsg
+        return
+      }
+      this.submitMissingFieldsMsg = null
       
       let file1 = null
       let file2 = null
@@ -279,6 +284,49 @@ export default {
       doFetch(this.$store.commit, 'advertisingApplySubmit', 
         adApi.submitAdvertisingApplication(
           file1, file2, this.adType, this.adName, this.adLink, this.adMainText, this.adSecondaryText, this.notes))
+    },
+
+    getSubmitFieldsErrorMessage () {
+      let errorMessage = 'Missing fields: '
+      let isMissing = false
+
+      if (!this.adType) {
+        errorMessage += 'ad type, '
+        isMissing = true
+      }
+      if (!this.adLink) {
+        errorMessage += 'link, '
+        isMissing = true
+      }
+      if (!this.adName) {
+        errorMessage += 'ad name, '
+        isMissing = true
+      }
+      if (this.isCardAd) {
+        if (!this.adMainText) {
+          errorMessage += 'main text, '
+          isMissing = true
+        }
+        if (!this.fileCard1) {
+          errorMessage += 'big image, '
+          isMissing = true
+        }
+        if (!this.fileCard1) {
+          errorMessage += 'small image, '
+          isMissing = true
+        }
+      }
+      else {
+        if (!this.fileBanner) {
+          errorMessage += 'image, '
+          isMissing = true
+        }
+      }
+
+      if (!isMissing) {
+        return null
+      }
+      return errorMessage.substring(0, errorMessage.length-2)
     },
 
     processFileUploadChangeBanner (changeEvent) {

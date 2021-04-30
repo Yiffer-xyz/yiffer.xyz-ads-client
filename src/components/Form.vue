@@ -9,11 +9,14 @@
 
     <slot v-if="!fetchState.fetched"></slot>
 
-    <ResponseMessage :message="responseMessage"
-                     :messageType="fetchState.failed ? 'error' : 'success'"
+    <ResponseMessage :message="showResponseMessage"
+                     :messageType="(fetchState.failed || errorText) ? 'error' : 'success'"
                      :preventClose="fetchState.fetched"
                      disableElevation
-                     @closeMessage="responseMessage = ''"
+                     @closeMessage="() => {
+                       responseMessage = ''
+                       $emit('closeMessage')
+                     }"
                      :style="fetchState.fetched ? 'margin-top: 0; width: 100%;' : 'margin-top: 1rem; width: 100%;'"/>
 
     <div v-if="!hideSubmit && !fetchState.fetched" class="horizontalFlex inlineFlex buttonsContainer">
@@ -28,7 +31,7 @@
       <LoadingButton :text="buttonText"
                      :iconType="buttonIconType"
                      :isDisabled="!canSubmit"
-                     :isLoading="fetchState.fetching"
+                     :isLoading="!!fetchState.fetching"
                      styles="align-self: center;"/>
     </div>
 
@@ -90,6 +93,15 @@ export default {
   data: function () {
     return {
       responseMessage: '',
+    }
+  },
+
+  computed: {
+    showResponseMessage () {
+      if (this.errorText) {
+        return this.errorText
+      }
+      return this.responseMessage
     }
   },
   
