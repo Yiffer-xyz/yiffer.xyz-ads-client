@@ -47,10 +47,10 @@
               classes="mb-16"/>
 
       <div class="verticalFlex alignItemsStart mb-32" v-if="adType">
-        <p style="font-size: 0.9rem;" class="textAlignLeft">
+        <p style="font-size: 0.9rem;" class="textLeft">
           You'll choose the pricing you want after approval, but here are the options:
         </p>
-        <ul class="textAlignLeft" style="font-size: 0.9rem;">
+        <ul class="textLeft" style="font-size: 0.9rem;">
           <li v-for="priceText in adPriceTexts" :key="priceText">
             {{priceText}}
           </li>
@@ -82,13 +82,13 @@
             <input type="file" @change="processFileUploadChangeBanner" id="bannerAdFile" accept="image/x-png,image/gif,image/jpeg" class="input-file"/>
             <p>Select file</p>
           </div>
-          <p v-if="fileBanner" class="textAlignLeft">Selected: {{fileBanner.name}}</p>
+          <p v-if="fileBanner" class="textLeft">Selected: {{fileBanner.name}}</p>
         </div>
 
-        <p v-if="fileErrorMessageBanner" class="red-color mt-4 textAlignLeft" style="max-width: 24rem;">
+        <p v-if="fileErrorMessageBanner" class="red-color mt-4 textLeft" style="max-width: 24rem;">
           {{fileErrorMessageBanner}}
         </p>
-        <p v-else-if="fileBanner" class="mt-4 textAlignLeft">
+        <p v-else-if="fileBanner" class="mt-4 textLeft">
           <CheckIcon/> File matches size requirements.
         </p>
       </div>
@@ -100,13 +100,13 @@
             <input type="file" @change="processFileUploadChangeCard1" id="card1AdFile" accept="image/x-png,image/gif,image/jpeg" class="input-file"/>
             <p>Select file</p>
           </div>
-          <p v-if="fileCard1" class="textAlignLeft">Selected: {{fileCard1.name}}</p>
+          <p v-if="fileCard1" class="textLeft">Selected: {{fileCard1.name}}</p>
         </div>
 
-        <p v-if="fileErrorMessageCard1" class="red-color mt-4 textAlignLeft" style="max-width: 24rem;">
+        <p v-if="fileErrorMessageCard1" class="red-color mt-4 textLeft" style="max-width: 24rem;">
           {{fileErrorMessageCard1}}
         </p>
-        <p v-else-if="fileCard1" class="mt-4 textAlignLeft">
+        <p v-else-if="fileCard1" class="mt-4 textLeft">
           <CheckIcon/> File matches size requirements.
         </p>
       </div>
@@ -118,13 +118,13 @@
             <input type="file" @change="processFileUploadChangeCard2" id="card2AdFile" accept="image/x-png,image/gif,image/jpeg" class="input-file"/>
             <p>Select file</p>
           </div>
-          <p v-if="fileCard2" class="textAlignLeft">Selected: {{fileCard2.name}}</p>
+          <p v-if="fileCard2" class="textLeft">Selected: {{fileCard2.name}}</p>
         </div>
 
-        <p v-if="fileErrorMessageCard2" class="red-color mt-4 textAlignLeft" style="max-width: 24rem;">
+        <p v-if="fileErrorMessageCard2" class="red-color mt-4 textLeft" style="max-width: 24rem;">
           {{fileErrorMessageCard2}}
         </p>
-        <p v-else-if="fileCard2" class="mt-4 textAlignLeft">
+        <p v-else-if="fileCard2" class="mt-4 textLeft">
           <CheckIcon/> File matches size requirements.
         </p>
       </div>

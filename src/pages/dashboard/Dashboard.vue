@@ -44,7 +44,7 @@
           You have no current or previous ads.
         </p>
 
-        <div v-else class="scrolling-table-container">
+        <div v-else class="scrollingTableContainer">
           <table cellspacing=0 class="paidImageTable" colspacing=0>
             <thead>
               <tr>

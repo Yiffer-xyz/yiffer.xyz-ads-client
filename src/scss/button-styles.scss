@@ -1,20 +1,5 @@
 @import "shadows.scss";
 
-.blueButton {
-  border: none;
-  background: #00aaff;
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 2px;
-  a, p, span, svg {
-    color: white;
-  }
-  @include simpleshadowSmall;
-  &:hover {
-    cursor: pointer;
-  }
-}
-
 $buttonPaddingSides: 12px;
 $buttonPaddingTopBot: 6px;
 $buttonBorderWidth: 2px;

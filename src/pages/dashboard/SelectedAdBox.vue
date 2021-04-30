@@ -241,7 +241,7 @@
           You should now pay to activate your ad! Your pricing options are:
         </p>
 
-        <ul class="textAlignLeft" style="font-size: 0.9rem;">
+        <ul class="textLeft" style="font-size: 0.9rem;">
           <li v-for="priceText in adPriceTexts" :key="priceText">
             {{priceText}}
           </li>

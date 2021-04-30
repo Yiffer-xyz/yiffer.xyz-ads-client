@@ -64,22 +64,6 @@ export default {
     }))
   },
 
-  async getAdsByStatuses (statuses) {
-    let params = new URLSearchParams()
-    statuses.forEach(status => params.append('statuses', status))
-    let requestQuery = {params: params}
-
-    let response = await axios.get(baseUrl + '/paid-images', requestQuery)
-    if (!response.data.error) { return response.data }
-    else { return [] }
-  },
-  
-  async getAllAds () {
-    let response = await axios.get(baseUrl + '/paid-images')
-    if (!response.data.error) { return response.data }
-    else { return [] }
-  },
-
   async getMyAds () {
     try {
       let response = await axios.get(baseUrl + '/paid-images/me')
@@ -95,22 +79,6 @@ export default {
     return response.data
   },
 
-  async toggleRenewal (adId, shouldRenew) {
-    try {
-      let response = await axios.post(`${baseUrl}/paid-images/${adId}/toggle-renew`, {shouldRenew})
-      return response.data
-    }
-    catch (err) {
-      return {success: false, message: err.response.data}
-    }
-  },
-
-  async getAdsBasic () {
-    let response = await axios.get(baseUrl + '/paid-images-basic')
-    if (!response.data.error) { return response.data }
-    else { return [] }
-  },
-
   async deleteOrDeactivateAd (adId) {
     try {
       await axios.delete(`${baseUrl}/paid-images/${adId}`)
@@ -119,9 +87,5 @@ export default {
     catch (err) {
       return {success: false, message: err.response.data}
     }
-  },
-
-  async logAdClick (adId) {
-    axios.post(baseUrl + '/paid-images-click', {adId})
   },
 }

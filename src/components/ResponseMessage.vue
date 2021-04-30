@@ -9,7 +9,7 @@
        :style="outsideStyle"
        v-show="message && message.length > 0"
        id="responseMessageContainer">
-    <p class="no-margin-top">{{message}}</p>
+    <p class="mt-0">{{message}}</p>
     <div @click="closeMessage()" v-if="!preventClose" class="close-container">
       <CloseIcon title="Close"/>
     </div>

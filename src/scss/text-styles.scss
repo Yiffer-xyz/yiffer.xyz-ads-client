@@ -14,7 +14,6 @@ h3 {
 
 p, li, label, td, th, a {
   @media (max-width: 900px) {
-    // font-size: 14px;
     word-break: break-word;
   }
 }
@@ -52,16 +51,6 @@ ul {
 .textAlignCenter {
   text-align: center;
 }
-.textAlignLeft {
-  text-align: left;
-}
-
-.spaced-list {
-  li {
-    margin-top: 1rem;
-  }
-}
-
 .textLeft {
   text-align: left;
 }
@@ -98,29 +87,6 @@ ul {
   }
   @media (max-width: 900px) {
     max-width: 90%;
-  }
-}
-
-.smaller-width-text {
-  width: fit-content;
-  max-width: 26rem;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-
-  @media (max-width: 650px) {
-    max-width: 90%;
-  }
-}
-
-.center-on-mobile {
-  @media (max-width: 900px) {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center !important;
   }
 }
 
@@ -196,10 +162,6 @@ label {
   font-weight: 300;
 }
 
-.smaller-text {
-  font-size: 12px;
-}
-
 .red-color {
   color: $themeRedText !important;
 }
@@ -211,10 +173,6 @@ label {
   font-weight: 600;
 }
 
-.courier {
-  font-family: 'Andale Mono', monospace;
-  font-size: 13px;
-}
 .mono {
   font-family: 'Andale Mono', monospace;
   padding: 1px 3px;
@@ -242,22 +200,6 @@ label {
   @extend .mono;
   background-color: $themeRed4;
   border-color: $themeRed;
-}
-
-.icons-and-numbers-row {
-  span {
-    margin-right: 4px;
-
-    @media (max-width: 900px) {
-      margin-right: 0px;
-    }
-  }
-  @media (max-width: 900px) {
-    p {
-      display: flex;
-      flex-direction: column;
-    }
-  }
 }
 
 .dark {
