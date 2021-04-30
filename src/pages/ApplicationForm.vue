@@ -76,7 +76,7 @@
                  :helperTextError="remainingCharsSecondaryText<0"/>
 
       <div class="yForm2Field" v-if="adType && adType === 'banner'">
-        <label for="bannerAdFile">Image or gif (680x100):</label>
+        <label for="bannerAdFile">Image or gif (728x90):</label>
         <div class="horizontalFlexLeft flexWrap mt-4">
           <div class="pretty-input-upload mr-8">
             <input type="file" @change="processFileUploadChangeBanner" id="bannerAdFile" accept="image/x-png,image/gif,image/jpeg" class="input-file"/>
@@ -322,8 +322,8 @@ export default {
             }
           }
           else if (adFileType === 'banner') {
-            if (tempImage.width !== 680 || tempImage.height !== 100) {
-              this.fileErrorMessageBanner = `The file does not match the 680x100 pixel requirement (is ${tempImage.width}x${tempImage.height}).`
+            if (tempImage.width !== 728 || tempImage.height !== 90) {
+              this.fileErrorMessageBanner = `The file does not match the 728x90 pixel requirement (is ${tempImage.width}x${tempImage.height}).`
             }
           }
 				}

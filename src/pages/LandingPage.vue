@@ -40,7 +40,7 @@
         </div>
       </div>
 
-      <div class="mt-16">
+      <div class="upperLoginButton">
         <router-link :to="{name: 'apply'}"
                      v-if="isAuthenticated"
                      class="underline-link">
@@ -48,13 +48,11 @@
             Apply as an advertiser <RightArrow/>
           </button>
         </router-link>
-        <div v-else>
-          <p class="semiBold">
-            <button class="y-button" @click.prevent="showLoginModal">
-              Log in to apply as an advertiser
-            </button> 
-          </p>
-        </div>
+        <router-link v-else :to="{name: 'login'}">
+          <button class="y-button">
+            Log in to apply as an advertiser
+          </button> 
+        </router-link>
       </div>
 
       <div class="adType mt-32">
@@ -120,7 +118,7 @@
         <div style="width: fit-content; padding-right: 1rem;">
           <h2>Ad type: Comic banner</h2>
           <p>
-            Your ad will be displayed above comics, between the title/tags and the first page. This placement is very eye-catching, hence the higher price. Every comic will have an ad displayed above it.
+            Your ad will be displayed above comics, between the title/tags and the first page. This placement is very eye-catching, hence the higher price. Every comic will have an ad displayed above it. The dimensions are the same as FurAffinity's banners, so you can reuse your ads from there!
           </p>
 
           <p class="adMiniHeader">
@@ -150,7 +148,7 @@
             Media
           </p>
           <p>
-            Format: PNG or GIF. Make sure that the picture is visible when scaled down to the width of a mobile screen (rougly 370px, give or take). The maximum size, which must be submitted, is 100x680 pixels.
+            Format: PNG or GIF. Make sure that the picture is visible when scaled down to the width of a mobile screen (rougly 370px, give or take). The maximum size, which must be submitted, is 728x90 pixels.
           </p>
         </div>
 
@@ -203,13 +201,11 @@
             Apply as an advertiser <RightArrow/>
           </button>
         </router-link>
-        <div v-else>
-          <p class="semiBold">
-            <button class="y-button" @click.prevent="showLoginModal">
-              Log in to apply as an advertiser
-            </button> 
-          </p>
-        </div>
+        <router-link v-else :to="{name: 'login'}">
+          <button class="y-button">
+            Log in to apply as an advertiser
+          </button> 
+        </router-link>
       </div>
     </div>
   </div>
@@ -272,6 +268,12 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/scss/shadows.scss";
+.upperLoginButton {
+  margin-top: 1rem;
+  @media (max-width: 900px) {
+    margin-top: 2rem;
+  }
+}
 
 .applyButton {
   min-width: 24rem;
