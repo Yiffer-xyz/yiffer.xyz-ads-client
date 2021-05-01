@@ -207,6 +207,9 @@ const adStatuses = {
   th, td {
     padding: 0.5rem;
   }
+  tr {
+    background-attachment : fixed;
+  }
 }
 .paidImageRow {
   &:hover {
