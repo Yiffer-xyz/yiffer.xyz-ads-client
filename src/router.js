@@ -15,11 +15,11 @@ async function rerouteIfNotLoggedIn(to, from, next) {
       next()
     }
     else {
-      next({ name: 'landingPage' })
+      next({ name: 'login' })
     }
   }
   catch (err) {
-    next({ name: 'landingPage' })
+    next({ name: 'login' })
   }
 }
 
@@ -30,11 +30,11 @@ async function rerouteIfLoggedIn(to, from, next) {
       next()
     }
     else {
-      next({ name: 'comicList' })
+      next({ name: 'landingPage' })
     }
   }
   catch (err) {
-    next({ name: 'comicList' })
+    next({ name: 'landingPage' })
   }
 }
 
