@@ -224,7 +224,7 @@ const adStatuses = {
 }
 
 .selectedAd {
-  background: linear-gradient(to right, $themeGreen1, $themeGreen2) !important;
+  background: $themeGreen2;
   td, &:hover>td {
     background: transparent !important;
     p:not(.mono) {

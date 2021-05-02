@@ -204,7 +204,7 @@ nav {
 
 .navLeft, .navRight {
   padding: 0.5rem 4rem;
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 1100px) {
     padding: 0.5rem 0rem;
   }
 }
