@@ -75,6 +75,7 @@
               <b v-if="price.discountedPrice">
                 {{`(discounted: $${price.discountedPrice/price.durationMonths} now!)`}}
               </b>
+              (${{price.discountedPrice ? price.discountedPrice : price.price}} total)
             </p>
           </span>
 
@@ -93,10 +94,10 @@
             Media
           </p>
           <p>
-            Format: PNG or GIF. Two sizes must be submitted. It is probably wise to submit two different images/gifs, as mobile "cards" are much smaller than desktop ones, and images appropriate for one card size might not be as good for the other. The ratio is the same, so you may submit the same image, only resized, if you wish.
+            Format: JPG, PNG, or GIF. Two sizes must be submitted. It is probably wise to submit two different images/gifs, as mobile "cards" are much smaller than desktop ones, and images appropriate for one card size might not be as good for the other. The ratio is the same, so you may submit the same image, only resized, if you wish.
           </p>
           <p class="mt-12">
-            Sizes: 200x283 pixels for the big version, and 100x141 pixels for the small one.
+            Sizes: 200x283 pixels for the big version, and 100x141 pixels for the small one. Both must be submitted.
           </p>
         </div>
         <div class="imgContainer" v-if="$breakpoint.mdAndUp">
@@ -134,6 +135,7 @@
               <b v-if="price.discountedPrice">
                 {{`(discounted: $${price.discountedPrice/price.durationMonths} now!)`}}
               </b>
+              (${{price.discountedPrice ? price.discountedPrice : price.price}} total)
             </p>
           </span>
           
@@ -141,14 +143,14 @@
             Details
           </p>
           <p>
-            This ad has no text.
+            This ad has no displayed text, but you can place a message in the image itself if so desired.
           </p>
 
           <p class="adMiniHeader">
             Media
           </p>
           <p>
-            Format: PNG or GIF. Make sure that the picture is visible when scaled down to the width of a mobile screen (rougly 370px, give or take). The maximum size, which must be submitted, is 728x90 pixels.
+            Format: JPG, PNG, or GIF. Make sure that the picture is visible when scaled down to the width of a mobile screen (rougly 370px, give or take). The maximum size, which must be submitted, is 728x90 pixels.
           </p>
         </div>
 
