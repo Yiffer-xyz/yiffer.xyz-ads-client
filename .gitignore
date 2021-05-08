@@ -2,6 +2,8 @@
 node_modules
 /dist
 
+config.json
+
 public/comics/*
 public/paid-images/*
 

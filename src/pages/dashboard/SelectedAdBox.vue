@@ -77,13 +77,13 @@
 
       <!-- MEDIA -->
       <img v-if="ad.adType === 'banner'"
-           :src="`${config.paidImagesDirectory}/${ad.id}.${ad.filetype}?${generateRandomQueryString()}`"
+           :src="`${config.paidImagesBucketName}/${ad.id}.${ad.filetype}?${generateRandomQueryString()}`"
            style="max-width: 100%;"/>
 
       <div v-if="ad.adType === 'card'" class="cardImagesContainer">
-        <img :src="`${config.paidImagesDirectory}/${ad.id}-big.${ad.filetype}?${generateRandomQueryString()}`"
+        <img :src="`${config.paidImagesBucketName}/${ad.id}-big.${ad.filetype}?${generateRandomQueryString()}`"
             style="max-width: 100%; margin-right: 1rem;"/>
-        <img :src="`${config.paidImagesDirectory}/${ad.id}-small.${ad.filetype}?${generateRandomQueryString()}`"
+        <img :src="`${config.paidImagesBucketName}/${ad.id}-small.${ad.filetype}?${generateRandomQueryString()}`"
             style="max-width: 100%;"/>
       </div>
 

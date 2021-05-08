@@ -1,5 +1,4 @@
 {
   "apiBaseUrl": "/api",
-  "comicDirectory": "https://storage.googleapis.com/yiffer-comics/comics",
-  "paidImagesDirectory": "https://storage.googleapis.com/yiffer-paid-images"
+  "paidImagesBucketName": "https://storage.googleapis.com/yiffer-paid-images-beta"
 }
