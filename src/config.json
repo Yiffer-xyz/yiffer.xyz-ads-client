@@ -1,4 +1,4 @@
 {
   "apiBaseUrl": "/api",
-  "paidImagesBucketName": "https://storage.googleapis.com/yiffer-paid-images-beta"
+  "paidImagesBucketName": "https://storage.googleapis.com/yiffer-paid-images"
 }

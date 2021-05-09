@@ -9,7 +9,6 @@ import Login from '@/pages/Login.vue'
 Vue.use(Router)
 
 async function rerouteIfNotLoggedIn(to, from, next) {
-  console.log('rerouting, NOTTT logged in')
   try {
     let isLoggedIn = await store.dispatch('checkAndSetLoginStatus')
     if (isLoggedIn) {
@@ -25,7 +24,6 @@ async function rerouteIfNotLoggedIn(to, from, next) {
 }
 
 async function rerouteIfLoggedIn(to, from, next) {
-  console.log('rerouting, U RRRR logged in')
   try {
     let isLoggedIn = await store.dispatch('checkAndSetLoginStatus')
     if (!isLoggedIn) {
