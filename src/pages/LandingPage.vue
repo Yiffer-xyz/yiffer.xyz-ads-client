@@ -41,8 +41,13 @@
       </div>
 
       <div class="upperLoginButton">
+        <a v-if="isAuthenticated && userData && !userData.email" href="https://yiffer.xyz/account">
+          <button class="y-button">
+            Add an email to your account to advertise
+          </button> 
+        </a>
         <router-link :to="{name: 'apply'}"
-                     v-if="isAuthenticated"
+                     v-else-if="isAuthenticated"
                      class="underline-link">
           <button class="y-button-big applyButton">
             Apply as an advertiser <RightArrow/>
@@ -196,13 +201,18 @@
       
 
       <div class="mt-32 mb-16">
+        <a v-if="isAuthenticated && userData && !userData.email" href="https://yiffer.xyz/account">
+          <button class="y-button">
+            Add an email to your account to advertise
+          </button> 
+        </a>
         <router-link :to="{name: 'apply'}"
-                     v-if="isAuthenticated"
+                     v-else-if="isAuthenticated"
                      class="underline-link">
           <button class="y-button-big applyButton">
             Apply as an advertiser <RightArrow/>
           </button>
-        </router-link>
+        </router-link>  
         <router-link v-else :to="{name: 'login'}">
           <button class="y-button">
             Log in to apply as an advertiser
@@ -230,7 +240,7 @@ export default {
 
   computed: {
     ...mapGetters([
-      'isDarkTheme', 'isAuthenticated', 'paidImagePrices',
+      'isDarkTheme', 'isAuthenticated', 'paidImagePrices', 'userData',
     ]),
   },
 

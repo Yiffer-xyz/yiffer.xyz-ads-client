@@ -159,7 +159,7 @@
                        @closeMessage="() => {responseMessage = ''}" />
 
       <!-- BUTTONS: EDIT, DEACTIVATE -->
-      <div class="horizontalFlexLeft mt-16" v-if="!isEditingOrDeleting">
+      <div class="horizontalFlexLeft mt-16" v-if="!isEditingOrDeleting && !isCancelled">
         <button @click="() => isEditingAd = true"
                 class="y-button mr-16">
           Edit ad
@@ -174,7 +174,7 @@
 
 
       <!-- BUTTONS: EDITING: CANCEL, SAVE -->
-      <div v-if="isEditingAd" class="mt-16 mb-16">
+      <div v-if="isEditingAd && !isCancelled" class="mt-16 mb-16">
         <div class="horizontalFlex justifyStart">
           <button @click="cancelEdit"
                   class="y-button y-button-neutral mr-16"
@@ -284,7 +284,7 @@
 
         <span v-else-if="paidImageClickStats.fetched">
           <p v-if="paidImageClickStats.payload.length <= 1" style="margin-top: -8px;">
-            No daily click stats yet. Click stats are calculated at midnight, GMT +0. When your ad has been active for two days, a graph will appear here.
+            No daily click stats yet. Once your ad has been active for two days, a graph will appear here.
           </p>
 
           <ClickStats v-else-if="!!chartData"
@@ -324,6 +324,10 @@ export default {
     ...mapGetters([
       'myPaidImages', 'paidImagePrices', 'paidImagePayments', 'paidImageClickStats', 'isDarkTheme',
     ]),
+
+    isCancelled () {
+      return this.ad && this.ad.status === adStatuses.cancelled
+    },
 
     chartData () {
       if (this.paidImageClickStats.fetched && this.paidImageClickStats.payload.length > 0) {
