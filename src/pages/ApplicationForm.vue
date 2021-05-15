@@ -21,6 +21,12 @@
       <p>
         It may take a few days to get your ad approved, as well as for us to register your payment afterwards. In the near future, we aim to automate the payment process by creating a solution where you can pay by credit card instead. This will eliminate the need for manual payment review.
       </p>
+
+      <p>
+        <b>
+          While there's a free discount, we'll skip the "awaiting payment" step. This means that we'll activate your ad as soon as it looks good. You'll receive an email when your ad has been activated.
+        </b>
+      </p>
     </div>
 
     <Form :buttonText="'Submit for approval'"
@@ -49,7 +55,7 @@
 
       <div class="verticalFlex alignItemsStart mb-32" v-if="adType">
         <p style="font-size: 0.9rem;" class="textLeft">
-          You'll choose the pricing you want after approval, but here are the options:
+          You'll choose the pricing you want after approval, but here are the options (see above for notes on free discount):
         </p>
         <ul class="textLeft" style="font-size: 0.9rem;">
           <li v-for="priceText in adPriceTexts" :key="priceText">
@@ -212,7 +218,7 @@ export default {
     adPriceTexts () {
       if (!this.paidImagePrices.fetched || !this.adType) { return [] }
       return this.paidImagePrices.payload[this.adType].map(({durationMonths, price, discountedPrice}) => {
-        if (discountedPrice) {
+        if (discountedPrice !== null) {
           return `Discounted: ${'$'+discountedPrice/durationMonths}/month for a duration of ${durationMonths} months (${'$'+discountedPrice} total)`
         }
         return `${'$'+price/durationMonths}/month for a duration of ${durationMonths} months (${'$'+price} total)`

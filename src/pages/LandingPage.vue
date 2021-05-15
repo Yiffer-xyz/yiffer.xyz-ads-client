@@ -19,7 +19,7 @@
             20,000+ daily visitors
           </h3>
           <p>
-            As of summer 2020, 20,000 people visited Yiffer.xyz every day. We record the number of clicks your ads get, so you can see and decide for yourself whether to keep going after your first month(s).
+            As of the re-launch in May 2021, almost 20,000 people are visiting Yiffer.xyz every day. We record the number of clicks your ads get, so you can see and decide for yourself whether to keep going after your first months.
           </p>
         </div>
         <div class="box">
@@ -32,10 +32,10 @@
         </div>
         <div class="box">
           <h3>
-            Get in early - 50% off at first!
+            Get in early - <span class="themeColorText">FREE at first!</span>
           </h3>
           <p>
-            To kick advertising off here at Yiffer.xyz, we're offering 50% discounts on all ad types! Not only is it cheaper at first, you should also keep in mind that the fewer advertisers there are, the more frequently your own ad will be displayed. In other words, getting in early will give you much more value for your money than waiting.
+            To kick advertising off here at Yiffer.xyz, we're offering 100% discounts on all ad types! Not only is it free, you should also keep in mind that the fewer advertisers there are, the more frequently your own ad will be displayed. In other words, getting in early will give you more clicks than waiting!
           </p>
         </div>
       </div>
@@ -77,10 +77,10 @@
           <span v-else>
             <p v-for="price in paidImagePrices.payload.card" :key="price.durationMonths">
               {{price.durationMonths}} months: <b>${{price.price/price.durationMonths}} per month</b>
-              <b v-if="price.discountedPrice">
+              <b v-if="price.discountedPrice !== null">
                 {{`(discounted: $${price.discountedPrice/price.durationMonths} now!)`}}
               </b>
-              (${{price.discountedPrice ? price.discountedPrice : price.price}} total)
+              (${{price.discountedPrice !== null ? price.discountedPrice : price.price}} total)
             </p>
           </span>
 
@@ -137,10 +137,10 @@
           <span v-else>
             <p v-for="price in paidImagePrices.payload.banner" :key="price.durationMonths">
               {{price.durationMonths}} months: <b>${{price.price/price.durationMonths}} per month</b>
-              <b v-if="price.discountedPrice">
+              <b v-if="price.discountedPrice !== null">
                 {{`(discounted: $${price.discountedPrice/price.durationMonths} now!)`}}
               </b>
-              (${{price.discountedPrice ? price.discountedPrice : price.price}} total)
+              (${{price.discountedPrice !== null ? price.discountedPrice : price.price}} total)
             </p>
           </span>
           
@@ -332,6 +332,10 @@ export default {
   }
 }
 
+.themeColorText {
+  color: $themeGreen2Darker;
+}
+
 .adMiniHeader {
   font-weight: 600;
   margin-top: 0.75rem;
@@ -465,6 +469,9 @@ export default {
   .box {
     background-color: $themeDark1;
     box-shadow: 0 4px 24px rgba(33, 33, 33, 0.5);
+  }
+  .themeColorText {
+    color: $themeGreen2Dark;
   }
 }
 </style>
