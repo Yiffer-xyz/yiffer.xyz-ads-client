@@ -362,11 +362,10 @@ export default {
 
     adPriceTexts () {
       if (!this.paidImagePrices.fetched || !this.ad) { return [] }
-      let shouldShowDiscount = this.adTypesToShowDiscountedPrices.includes(this.ad.status)
 
-      return this.paidImagePrices.payload[this.ad.adType].map(({durationMonths, price, discountedPrice}) => {
-        if (discountedPrice && shouldShowDiscount) {
-          return `Discounted: ${'$'+discountedPrice/durationMonths}/month for a duration of ${durationMonths} months (${'$'+discountedPrice} total)`
+return this.paidImagePrices.payload[this.ad.adType].map(({durationMonths, price, discountedPrice}) => {
+        if (discountedPrice !== null) {
+          return 'FREE! $0 total. Will automatically be selected as long as we offer this discount.'
         }
         return `${'$'+price/durationMonths}/month for a duration of ${durationMonths} months (${'$'+price} total)`
       })

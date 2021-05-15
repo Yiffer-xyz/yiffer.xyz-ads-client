@@ -27,6 +27,12 @@
         <p class="mt-16">
           It may take a few days to get your ad approved, as well as for us to register your payment afterwards. In the near future, we aim to automate the payment process by creating a solution where you can pay by credit card instead. This will eliminate the need for manual payment review.
         </p>
+          
+        <p class="mt-16">
+          <b>
+            While there's a free discount, we'll skip the "awaiting payment" step. This means that we'll activate your ad as soon as it looks good. You'll receive an email when your ad has been activated.
+          </b>
+        </p>
       </div>
 
       <SelectedAdBox v-if="selectedAd" :ad="selectedAd" @updateAds="fetchAndUpdateAds"/>

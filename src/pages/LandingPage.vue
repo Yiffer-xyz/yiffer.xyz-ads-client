@@ -76,10 +76,8 @@
           </p>
           <span v-else>
             <p v-for="price in paidImagePrices.payload.card" :key="price.durationMonths">
-              {{price.durationMonths}} months: <b>${{price.price/price.durationMonths}} per month</b>
-              <b v-if="price.discountedPrice !== null">
-                {{`(discounted: $${price.discountedPrice/price.durationMonths} now!)`}}
-              </b>
+              {{price.durationMonths}} month{{price.durationMonths !== 1 ? 's' : ''}}: <b v-if="price.discountedPrice === null">${{price.price/price.durationMonths}} per month</b>
+              <b v-else>FREE!</b>
               (${{price.discountedPrice !== null ? price.discountedPrice : price.price}} total)
             </p>
           </span>
@@ -135,13 +133,19 @@
             Fetching prices...
           </p>
           <span v-else>
+            <p v-for="price in paidImagePrices.payload.card" :key="price.durationMonths">
+              {{price.durationMonths}} month{{price.durationMonths !== 1 ? 's' : ''}}: <b v-if="price.discountedPrice === null">${{price.price/price.durationMonths}} per month</b>
+              <b v-else>FREE!</b>
+              (${{price.discountedPrice !== null ? price.discountedPrice : price.price}} total)
+            </p>
+<!--             
             <p v-for="price in paidImagePrices.payload.banner" :key="price.durationMonths">
               {{price.durationMonths}} months: <b>${{price.price/price.durationMonths}} per month</b>
               <b v-if="price.discountedPrice !== null">
                 {{`(discounted: $${price.discountedPrice/price.durationMonths} now!)`}}
               </b>
               (${{price.discountedPrice !== null ? price.discountedPrice : price.price}} total)
-            </p>
+            </p> -->
           </span>
           
           <p class="adMiniHeader">
