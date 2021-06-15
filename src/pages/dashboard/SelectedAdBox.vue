@@ -363,9 +363,9 @@ export default {
     adPriceTexts () {
       if (!this.paidImagePrices.fetched || !this.ad) { return [] }
 
-return this.paidImagePrices.payload[this.ad.adType].map(({durationMonths, price, discountedPrice}) => {
+      return this.paidImagePrices.payload[this.ad.adType].map(({durationMonths, price, discountedPrice}) => {
         if (discountedPrice !== null) {
-          return 'FREE! $0 total. Will automatically be selected as long as we offer this discount.'
+          return 'FREE! $0 total. Will automatically be selected as long as we offer this discount, for your first month only.'
         }
         return `${'$'+price/durationMonths}/month for a duration of ${durationMonths} months (${'$'+price} total)`
       })
