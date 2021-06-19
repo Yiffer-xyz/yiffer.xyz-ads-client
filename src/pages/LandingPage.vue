@@ -50,7 +50,7 @@
                      v-else-if="isAuthenticated"
                      class="underline-link">
           <button class="y-button-big applyButton">
-            Apply as an advertiser - form now works! <RightArrow/>
+            Apply as an advertiser<RightArrow/>
           </button>
         </router-link>
         <router-link v-else :to="{name: 'login'}">
@@ -206,7 +206,7 @@
                      v-else-if="isAuthenticated"
                      class="underline-link">
           <button class="y-button-big applyButton">
-            Apply as an advertiser - form now works! <RightArrow/>
+            Apply as an advertiser<RightArrow/>
           </button>
         </router-link>  
         <router-link v-else :to="{name: 'login'}">
