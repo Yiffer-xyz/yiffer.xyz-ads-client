@@ -1,7 +1,13 @@
 <template>
   <button type="submit"
           class="yButtonSubmit"
-          :class="{yBtnIconPadding: iconType || isLoading, yButtonDisabled: isDisabled, yButtonLoading: isLoading}"
+          :disabled="isDisabled"
+          :class="{
+            yBtnIconPadding: iconType || isLoading,
+            'y-button-disabled': isDisabled,
+            yButtonLoading: isLoading,
+            yButtonSubmitRed: color === 'error',
+          }"
           @click="$emit('click')"
           :style="styles">
     <div style="width: 1rem; height: 1rem; margin-right: 0.25rem;" v-if="iconType || isLoading">
@@ -42,6 +48,12 @@ export default {
       type: String,
       required: false,
       validator: prop => ['check', 'save'].includes(prop),
+    },
+    color: {
+      type: String,
+      required: false,
+      default: 'primary',
+      validator: color => ['primary', 'error'].includes(color),
     },
     styles: {
       type: String,
@@ -94,18 +106,21 @@ $buttonBorderWidth: 2px;
   }
 }
 
+.yButtonSubmitRed {
+  background-color: $themeRed;
+  border-color: $themeRed;
+  color: white;
+  &:hover, &:focus {
+    border-color: $themeRed2;
+    background-color: $themeRed2;
+  }
+}
+
 .yBtnIconPadding {
   padding-right: $buttonPaddingSides+2px;
   padding-left: $buttonPaddingSides - 2px;
 }
-.yButtonDisabled {
-  opacity: 0.6;
-  filter: saturate(30%);
-  box-shadow: none;
-  &:hover {
-    box-shadow: none;
-  }
-}
+
 .yButtonLoading {
   opacity: 0.7;
   box-shadow: none;
@@ -123,8 +138,19 @@ $buttonBorderWidth: 2px;
       border-color: $themeBlueDTDarker;
     }
   }
+
+  .yButtonSubmitRed {
+    background-color: $themeRed2;
+    border-color: $themeRed2;
+    &:hover, &:focus {
+        background-color: $themeRed3;
+        border-color: $themeRed3;
+    }
+  }
+
   .yButtonDisabled {
     opacity: 0.7;
   }
+
 }
 </style>

@@ -86,7 +86,7 @@
         <label for="bannerAdFile">Image or gif (728x90):</label>
         <div class="horizontalFlexLeft flexWrap mt-4">
           <div class="pretty-input-upload mr-8">
-            <input type="file" @change="processFileUploadChangeBanner" id="bannerAdFile" accept="image/x-png,image/gif,image/jpeg" class="input-file"/>
+            <input type="file" @change="processFileUploadChangeBanner" id="bannerAdFile" accept="image/png,image/gif,image/jpeg" class="input-file"/>
             <p>Select file</p>
           </div>
           <p v-if="fileBanner" class="textLeft">Selected: {{fileBanner.name}}</p>
@@ -104,7 +104,7 @@
         <label for="card1AdFile">Image or gif (200x283):</label>
         <div class="horizontalFlexLeft flexWrap mt-4">
           <div class="pretty-input-upload mr-8">
-            <input type="file" @change="processFileUploadChangeCard1" id="card1AdFile" accept="image/x-png,image/gif,image/jpeg" class="input-file"/>
+            <input type="file" @change="processFileUploadChangeCard1" id="card1AdFile" accept="image/png,image/gif,image/jpeg" class="input-file"/>
             <p>Select file</p>
           </div>
           <p v-if="fileCard1" class="textLeft">Selected: {{fileCard1.name}}</p>
@@ -122,7 +122,7 @@
         <label for="card2AdFile">Image or gif (100x141):</label>
         <div class="horizontalFlexLeft flexWrap mt-4">
           <div class="pretty-input-upload mr-8">
-            <input type="file" @change="processFileUploadChangeCard2" id="card2AdFile" accept="image/x-png,image/gif,image/jpeg" class="input-file"/>
+            <input type="file" @change="processFileUploadChangeCard2" id="card2AdFile" accept="image/png,image/gif,image/jpeg" class="input-file"/>
             <p>Select file</p>
           </div>
           <p v-if="fileCard2" class="textLeft">Selected: {{fileCard2.name}}</p>

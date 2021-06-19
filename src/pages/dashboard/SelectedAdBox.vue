@@ -97,7 +97,7 @@
         <!-- CARD 1 -->
         <div class="horizontalFlexLeft flexWrap mt-4" v-if="ad.adType === 'card'">
           <div class="pretty-input-upload mr-8">
-            <input type="file" @change="processFileUploadChangeCard1" id="cardAdFile" accept="image/x-png,image/gif,image/jpeg" class="input-file"/>
+            <input type="file" @change="processFileUploadChangeCard1" id="cardAdFile" accept="image/png,image/gif,image/jpeg" class="input-file"/>
             <p>Replace big file</p>
           </div>
           <p v-if="fileCard1" class="alignSelfCenter bold" style="word-break: break-all;">
@@ -115,7 +115,7 @@
         <!-- CARD 2 -->
         <div class="horizontalFlexLeft flexWrap mt-4" v-if="ad.adType === 'card'">
           <div class="pretty-input-upload mr-8">
-            <input type="file" @change="processFileUploadChangeCard2" id="cardAdFile" accept="image/x-png,image/gif,image/jpeg" class="input-file"/>
+            <input type="file" @change="processFileUploadChangeCard2" id="cardAdFile" accept="image/png,image/gif,image/jpeg" class="input-file"/>
             <p>Replace small file</p>
           </div>
           <p v-if="fileCard2" class="alignSelfCenter bold" style="word-break: break-all;">
@@ -133,7 +133,7 @@
         <!-- BANNER -->
         <div class="horizontalFlexLeft flexWrap mt-4" v-if="ad.adType === 'banner'">
           <div class="pretty-input-upload mr-8">
-            <input type="file" @change="processFileUploadChangeBanner" id="cardAdFile" accept="image/x-png,image/gif,image/jpeg" class="input-file"/>
+            <input type="file" @change="processFileUploadChangeBanner" id="cardAdFile" accept="image/png,image/gif,image/jpeg" class="input-file"/>
             <p>Replace file</p>
           </div>
           <p v-if="fileBanner" class="alignSelfCenter bold" style="word-break: break-all;">
