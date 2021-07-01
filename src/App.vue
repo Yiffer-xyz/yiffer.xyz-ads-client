@@ -86,19 +86,18 @@
 import TwitterIcon from 'vue-material-design-icons/Twitter.vue'
 import DarkIcon from 'vue-material-design-icons/LightbulbOutline.vue'
 import LightIcon from 'vue-material-design-icons/Lightbulb.vue'
-import HomeIcon from 'vue-material-design-icons/Home.vue'
 
 import { mapGetters } from 'vuex'
 
 export default {
   components: {
-    TwitterIcon, DarkIcon, LightIcon, HomeIcon,
+    TwitterIcon, DarkIcon, LightIcon,
   },
 
   metaInfo() {
     return {
       meta: [
-        {name: 'theme-color', content: '#de2a60'},
+        {name: 'theme-color', content: '#a4f5e4'},
         {name: 'twitter:card', content: 'summary'},
         {vmid: 'twitterTitle', name: 'twitter:title', content: 'Advertising - Yiffer.xyz'},
         {vmid: 'twitterDesc', name: 'twitter:description', content: "Advertise on the internet's best furry comics website!"},
