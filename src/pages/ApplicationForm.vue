@@ -24,8 +24,9 @@
 
       <p>
         <b>
-          While there's a free discount, we'll skip the "awaiting payment" step. This means that we'll activate your ad as soon as it looks good. You'll receive an email when your ad has been activated.
+          If you are eligible for a free discount, we'll skip the "awaiting payment" step. This means that we'll activate your ad as soon as it looks good. You'll receive an email when your ad has been activated.
         </b>
+          If you are not eligible for a free discount, your ad will go directly to the "awaiting payment" stage after being approved. Note that the requirements for getting a free discount have changed lately - see the fourth box on the previous page for more details.
       </p>
     </div>
 
