@@ -30,7 +30,7 @@
           
         <p class="mt-16">
           <b>
-            While there's a free discount, we'll skip the "awaiting payment" step. This means that we'll activate your ad as soon as it looks good. You'll receive an email when your ad has been activated.
+            If you qualify for a free one-month discount, we'll skip the "awaiting payment" step. This means that we'll activate your ad as soon as it looks good. You'll receive an email when your ad has been activated.
           </b>
         </p>
       </div>
@@ -50,7 +50,7 @@
           You have no current or previous ads.
         </p>
 
-        <div v-else class="scrollingTableContainer">
+        <div v-else class="scrolling-table-container">
           <table cellspacing=0 class="paidImageTable" colspacing=0>
             <thead>
               <tr>
@@ -83,7 +83,7 @@
               </td>
               <td>
                 <p>
-                  {{capitalizeString(ad.adType)}}
+                  {{config.adTypeInfos[ad.adType].displayName}}
                 </p>
               </td>
               <td>
@@ -104,6 +104,7 @@
 import SelectedAdBox from '@/pages/dashboard/SelectedAdBox.vue'
 import Loading from '@/components/LoadingIndicator.vue'
 import miscApi from '@/api/miscApi'
+import config from '@/config.json'
 import advertisingApi from '../../api/advertisingApi'
 import { doFetch } from '../../utils/statefulFetch'
 import { mapGetters } from 'vuex'
@@ -125,8 +126,9 @@ export default {
     ...mapGetters(['myPaidImages', 'isDarkTheme']),
   },
 
-  data: function () {
+  data () {
     return {
+      config,
       isShowingInstructions: false,
       selectedAd: null,
       adTypesToShowExpiryDates: ['ACTIVE', 'ACTIVE BUT PENDING', 'ACTIVE BUT NEEDS CORR.', 'ENDED'],

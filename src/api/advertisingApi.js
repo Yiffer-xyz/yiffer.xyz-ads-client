@@ -30,14 +30,20 @@ export default {
     return response.data
   },
 
-  async updateAd (id, adName, link, mainText, secondaryText, file1, file2) {
+  async updateAd (id, adName, link, mainText, secondaryText, file) {
     let formData = new FormData()
     formData.append('link', link)
     formData.append('adName', adName)
-    if (mainText) { formData.append('mainText', mainText) }
-    if (secondaryText) { formData.append('secondaryText', secondaryText) }
-    if (file1) { formData.append('file1', file1) }
-    if (file2) { formData.append('file2', file2) }
+
+    if (mainText) {
+      formData.append('mainText', mainText)
+    }
+    if (secondaryText) {
+      formData.append('secondaryText', secondaryText)
+    }
+    if (file) {
+      formData.append('file1', file)
+    }
 
     try {
       let response = await axios.post(

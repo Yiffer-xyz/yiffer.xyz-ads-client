@@ -6,7 +6,7 @@
 
     <span v-else class="paidImageDetail">
       <p v-if="!isEditingAd">
-        <strong>{{ad.adName}}</strong> - {{ad.adType}} ad
+        <strong>{{ad.adName}}</strong> - {{config.adTypeInfos[ad.adType].displayName}} ad
       </p>
       <TextInput @change="newVal => editedAd.adName = newVal"
                  :value="editedAd.adName"
@@ -76,17 +76,8 @@
       </p>
 
       <!-- MEDIA -->
-      <img v-if="ad.adType === 'banner'"
-           :src="`${config.paidImagesBaseUrl}/${ad.id}.${ad.filetype}?${generateRandomQueryString()}`"
+      <img :src="`${config.paidImagesBaseUrl}/${ad.id}.${ad.filetype}?${generateRandomQueryString()}`"
            style="max-width: 100%;"/>
-
-      <div v-if="ad.adType === 'card'" class="cardImagesContainer">
-        <img :src="`${config.paidImagesBaseUrl}/${ad.id}-big.${ad.filetype}?${generateRandomQueryString()}`"
-            style="max-width: 100%; margin-right: 1rem;"/>
-        <img :src="`${config.paidImagesBaseUrl}/${ad.id}-small.${ad.filetype}?${generateRandomQueryString()}`"
-            style="max-width: 100%;"/>
-      </div>
-
 
       <!-- CHANGE MEDIA -->
       <span v-if="isEditingAd">
@@ -94,57 +85,23 @@
           Change media? If not, ignore this and the current one will be kept.
         </p>
 
-        <!-- CARD 1 -->
-        <div class="horizontalFlexLeft flexWrap mt-4" v-if="ad.adType === 'card'">
+        <div class="horizontalFlexLeft flexWrap mt-4">
           <div class="pretty-input-upload mr-8">
-            <input type="file" @change="processFileUploadChangeCard1" id="cardAdFile" accept="image/png,image/gif,image/jpeg" class="input-file"/>
-            <p>Replace big file</p>
-          </div>
-          <p v-if="fileCard1" class="alignSelfCenter bold" style="word-break: break-all;">
-            Selected: {{fileCard1.name}}
-          </p>
-        </div>
-
-        <p v-if="fileErrorMessageCard1" class="red-color mt-4 bold" style="margin-bottom: 1rem;">
-          {{fileErrorMessageCard1}}
-        </p>
-        <p v-else-if="fileCard1" class="mt-4" style="margin-bottom: 1rem;">
-          <CheckIcon/> File matches size requirements.
-        </p>
-
-        <!-- CARD 2 -->
-        <div class="horizontalFlexLeft flexWrap mt-4" v-if="ad.adType === 'card'">
-          <div class="pretty-input-upload mr-8">
-            <input type="file" @change="processFileUploadChangeCard2" id="cardAdFile" accept="image/png,image/gif,image/jpeg" class="input-file"/>
-            <p>Replace small file</p>
-          </div>
-          <p v-if="fileCard2" class="alignSelfCenter bold" style="word-break: break-all;">
-            Selected: {{fileCard2.name}}
-          </p>
-        </div>
-
-        <p v-if="fileErrorMessageCard2" class="red-color mt-4 bold">
-          {{fileErrorMessageCard2}}
-        </p>
-        <p v-else-if="fileCard2" class="mt-4">
-          <CheckIcon/> File matches size requirements.
-        </p>
-
-        <!-- BANNER -->
-        <div class="horizontalFlexLeft flexWrap mt-4" v-if="ad.adType === 'banner'">
-          <div class="pretty-input-upload mr-8">
-            <input type="file" @change="processFileUploadChangeBanner" id="cardAdFile" accept="image/png,image/gif,image/jpeg" class="input-file"/>
+            <input type="file"
+                   @change="processFileUploadChange"
+                   accept="image/png,image/gif,image/jpeg"
+                   class="input-file"/>
             <p>Replace file</p>
           </div>
-          <p v-if="fileBanner" class="alignSelfCenter bold" style="word-break: break-all;">
-            Selected: {{fileBanner.name}}
+          <p v-if="adFile" class="alignSelfCenter bold" style="word-break: break-all;">
+            Selected: {{adFile.name}}
           </p>
         </div>
 
-        <p v-if="fileErrorMessageBanner" class="red-color mt-4 bold">
-          {{fileErrorMessageBanner}}
+        <p v-if="fileErrorMessage" class="red-color mt-4 bold">
+          {{fileErrorMessage}}
         </p>
-        <p v-else-if="fileBanner" class="mt-4">
+        <p v-else-if="adFile" class="mt-4">
           <CheckIcon/> File matches size requirements.
         </p>
       </span>
@@ -373,12 +330,10 @@ export default {
 
     isSavable () {
       return this.isEditingAd
-        && (this.isEditedAdBanner || this.remainingCharsMainText >= 0)
-        && (this.isEditedAdBanner || this.remainingCharsSecondaryText >= 0)
-        && (this.isEditedAdBanner || this.editedAd.mainText.length > 0)
-        && !this.fileErrorMessageCard1
-        && !this.fileErrorMessageCard2
-        && !this.fileErrorMessageBanner
+        && !(this.isEditedAdCard && this.remainingCharsMainText < 0)
+        && !(this.isEditedAdCard && this.remainingCharsSecondaryText < 0)
+        && !(this.isEditedAdCard && this.editedAd.mainText.length <= 0)
+        && !this.fileErrorMessage
         && this.editedAd.link
         && this.editedAd.adName
     },
@@ -391,8 +346,8 @@ export default {
       return this.isDeletePermanent && this.ad.clicks > 0
     },
 
-    isEditedAdBanner () {
-      return this.ad.adType.includes('banner')
+    isEditedAdCard () {
+      return this.ad.adType === 'card'
     },
 
     remainingCharsMainText () {
@@ -408,18 +363,15 @@ export default {
     ad: Object,
   },
 
-  data() {
+  data () {
     return {
       config,
+
+      fileErrorMessage: '',
+      adFile: undefined,
+
       isEditingAd: false,
       isDeletingAd: false,
-      fileErrorMessage: '',
-      fileBanner: undefined,
-      fileCard1: undefined,
-      fileCard2: undefined,
-      fileErrorMessageBanner: '',
-      fileErrorMessageCard1: '',
-      fileErrorMessageCard2: '',
       isLoadingRenewal: false,
       isSubmitting: false,
       responseMessage: '',
@@ -451,67 +403,45 @@ export default {
   },
 
   methods: {
-    processFileUploadChangeBanner (changeEvent) {
-      this.fileBanner = changeEvent.target.files[0]
-      this.fileErrorMessageBanner = ''
-      if (this.fileBanner) {
-        this.checkFileRequirements('banner')
+    processFileUploadChange (changeEvent) {
+      this.adFile = changeEvent.target.files[0]
+      this.fileErrorMessage = ''
+      if (this.adFile) {
+        this.checkFileRequirements()
       }
     },
 
-    processFileUploadChangeCard1 (changeEvent) {
-      this.fileCard1 = changeEvent.target.files[0]
-      this.fileErrorMessageCard1 = ''
-      if (this.fileCard1) {
-        this.checkFileRequirements('card1')
-      }
-    },
-
-    processFileUploadChangeCard2 (changeEvent) {
-      this.fileCard2 = changeEvent.target.files[0]
-      this.fileErrorMessageCard2 = ''
-      if (this.fileCard2) {
-        this.checkFileRequirements('card2')
-      }
-    },
-
-		async checkFileRequirements (adFileType) {
+		async checkFileRequirements () {
 			let fileReader = new FileReader()
 			fileReader.onload = () => {
 				let tempImage = new Image()
 				tempImage.src = fileReader.result
 				tempImage.onload = () => {
-          if (adFileType === 'card1') {
-            if (tempImage.width !== 200 || tempImage.height !== 283) {
-              this.fileErrorMessageCard1 = `The file does not match the 200x283 pixel requirement (is ${tempImage.width}x${tempImage.height}).`
-            }
+          let isError = false
+
+          if (this.ad.adType === 'card') {
+            isError = (tempImage.width !== 200 || tempImage.height !== 283)
           }
-          else if (adFileType === 'card2') {
-            if (tempImage.width !== 100 || tempImage.height !== 141) {
-              this.fileErrorMessageCard2 = `The file does not match the 100x141 pixel requirement (is ${tempImage.width}x${tempImage.height}).`
-            }
+          else if (this.ad.adType === 'banner') {
+            isError = (tempImage.width !== 728 || tempImage.height !== 90)
           }
-          else if (adFileType === 'banner') {
-            if (tempImage.width !== 728 || tempImage.height !== 90) {
-              this.fileErrorMessageBanner = `The file does not match the 728x90 pixel requirement (is ${tempImage.width}x${tempImage.height}).`
-            }
+          else if (this.ad.adType === 'topSmall') {
+            isError = (tempImage.width !== 300 || tempImage.height !== 90)
+          }
+
+          if (isError) {
+            this.fileErrorMessage = `The file does not match the ${config.adTypeInfos[this.ad.adType].resolution} pixel requirement (is ${tempImage.width}x${tempImage.height}).`
           }
 				}
 			}
 
-      if (adFileType === 'card1') { fileReader.readAsDataURL(this.fileCard1) }
-      else if (adFileType === 'card2') { fileReader.readAsDataURL(this.fileCard2) }
-      else if (adFileType === 'banner') { fileReader.readAsDataURL(this.fileBanner) }
+      fileReader.readAsDataURL(this.adFile)
 		},
 
     resetAllEdits () {
       this.editedAd = { ...this.ad }
-      this.fileBanner = null
-      this.fileCard1 = null
-      this.fileCard2 = null
-      this.fileErrorMessageBanner = ''
-      this.fileErrorMessageCard1 = ''
-      this.fileErrorMessageCard2 = ''
+      this.adFile = null
+      this.fileErrorMessage = ''
       this.isLoadingRenewal = false
       this.isSubmitting = false
       this.deleteAdConfirmText = ''
@@ -528,20 +458,13 @@ export default {
       this.responseMessage = ''
       this.isSubmitting = true
 
-      let file1 = null
-      let file2 = null
-      if (this.fileCard1) { file1 = this.fileCard1 }
-      if (this.fileCard2) { file2 = this.fileCard2 }
-      if (this.fileBanner) { file1 = this.fileBanner }
-
       let result = await advertisingApi.updateAd(
         this.ad.id,
         this.editedAd.adName,
         this.editedAd.link,
         this.editedAd.mainText,
         this.editedAd.secondaryText,
-        file1,
-        file2,
+        this.adFile,
       )
       this.isSubmitting = false
 
