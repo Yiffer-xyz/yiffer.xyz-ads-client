@@ -4,7 +4,7 @@ import { format } from 'date-fns'
 let baseUrl = config.apiBaseUrl
 
 export default {
-  async submitAdvertisingApplication (file1, file2, adType, adName, adLink, adMainText, adSecondaryText, advertiserNotes) {
+  async submitAdvertisingApplication (file1, adType, adName, adLink, adMainText, adSecondaryText, advertiserNotes) {
     let formData = new FormData()
     formData.append('adType', adType)
     formData.append('adName', adName)
@@ -13,7 +13,6 @@ export default {
     formData.append('adSecondaryText', adSecondaryText)
     formData.append('advertiserNotes', advertiserNotes)
     formData.append('file1', file1)
-    formData.append('file2', file2)
 
     let response = await axios.post(
       baseUrl + '/paid-images',
