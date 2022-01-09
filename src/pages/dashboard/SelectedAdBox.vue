@@ -4,7 +4,7 @@
       Select an ad from the list below to see its full details
     </p>
 
-    <span v-else class="paidImageDetail">
+    <span v-else class="paidImageDetail" id="paidImageDetail">
       <p v-if="!isEditingAd">
         <strong>{{ad.adName}}</strong> - {{config.adTypeInfos[ad.adType].displayName}} ad
       </p>
@@ -102,6 +102,10 @@
       <span v-if="isEditingAd">
         <p>
           Change media? If not, ignore this and the current one will be kept.
+        </p>
+        
+        <p class="mt-8 red-text">
+          Note: If you change the media of the ad, it will be given a new ID. All click and payment stats will remain, only the ID will change. This is done for efficiency reasons (caching).
         </p>
 
         <div class="horizontalFlexLeft flexWrap mt-4">
@@ -418,6 +422,7 @@ export default {
     ad () {
       this.resetAllEdits()
       doFetch(this.$store.commit, 'paidImageClickStats', advertisingApi.getAdClickStats(this.ad.id))
+      document.getElementById('paidImageDetail').scrollIntoView({behavior: 'smooth'})
     }
   },
 
@@ -489,7 +494,7 @@ export default {
 
       if (result.success) {
         this.cancelEdit()
-        this.$emit('updateAds', this.ad.id)
+        this.$emit('updateAds', result.ad.id)
         this.responseMessage = 'Update successful'
         this.responseMessageType = 'success'
       }

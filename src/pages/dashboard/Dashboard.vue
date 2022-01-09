@@ -146,11 +146,12 @@ export default {
         let newAdsResult = await advertisingApi.getMyAds()
         this.$store.commit('set_myPaidImages_fetched', newAdsResult)
 
+        this.selectedAd = null
+
         if (adIdToSetSelectedWhenDone) {
-          this.selectedAd = this.myPaidImages.payload.find(paidImg => paidImg.id === adIdToSetSelectedWhenDone)
-        }
-        else {
-          this.selectedAd = null
+          setTimeout(() => {
+            this.selectedAd = this.myPaidImages.payload.find(paidImg => paidImg.id === adIdToSetSelectedWhenDone)
+          }, 25)
         }
       }
       catch (err) {
