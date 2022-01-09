@@ -76,8 +76,27 @@
       </p>
 
       <!-- MEDIA -->
-      <img :src="`${config.paidImagesBaseUrl}/${ad.id}.${ad.filetype}?${generateRandomQueryString()}`"
-           style="max-width: 100%;"/>
+      <picture v-if="ad.filetype === 'webp' || ad.filetype === 'jpg'" :key="ad.id">
+        <source :srcset="`${config.paidImagesBaseUrl}/${ad.id}.webp`"
+                type="image/webp">
+        <img :src="`${config.paidImagesBaseUrl}/${ad.id}.jpg`"
+              type="image/jpeg"
+              border="0"
+              style="max-width: 100%;">
+      </picture>
+
+      <video v-else-if="ad.filetype === 'webm'" autoplay muted loop style="max-width: 100%;" :key="ad.id">
+        <source :src="`${config.paidImagesBaseUrl}/${ad.id}.webm`"
+                type="video/webm">
+        <source :src="`${config.paidImagesBaseUrl}/${ad.id}.mp4`"
+                type="video/mp4">
+      </video>
+
+      <img v-else
+           :src="`${config.paidImagesBaseUrl}/${ad.id}.${ad.filetype}`"
+           :key="ad.id"
+           border="0"
+           style="max-width: 100%;">
 
       <!-- CHANGE MEDIA -->
       <span v-if="isEditingAd">
