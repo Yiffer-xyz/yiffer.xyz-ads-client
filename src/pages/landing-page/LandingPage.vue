@@ -16,10 +16,10 @@
         </div>
         <div class="box">
           <h3>
-            30,000+ daily visitors
+            40,000+ daily visitors
           </h3>
           <p>
-            As of August 2021, about 30,000 people are visiting Yiffer.xyz every day. We record the number of clicks your ads get, so you can see and decide for yourself whether to keep going after your first months.
+            As of January 2022, about 40,000 people are visiting Yiffer.xyz every day. We record the number of clicks your ads get and display this in a neat little dashboard, so you can see and decide for yourself whether to keep going after your first months.
           </p>
         </div>
         <div class="box">
@@ -31,11 +31,11 @@
           </p>
         </div>
         <div class="box">
-          <h3>
-            Get in early - <span class="themeColorText">FREE trial for creators!</span>
+          <h3 class="themeColorText">
+            FREE trial for creators!
           </h3>
           <p>
-            To kick advertising off here at Yiffer.xyz, we're offering 100% discounts on all ad types <i>for creators only</i>! Not only is it free, you should also keep in mind that the fewer advertisers there are, the more frequently your own ad will be displayed. In other words, getting in early will give you more clicks than waiting! Initially this was offered to anyone, but now that the advertising feature has matured a bit, we'd like more content creators - artists, fursuiters/murrsuiters, youtubers, etc. The free trial lasts for one month. We reserve the right to not offer the trial if the content being advertised seems to be of poor quality.
+            We're offering 100% discounts on all ad types <i>for creators only</i>! Not only is it free, you should also keep in mind that the fewer advertisers there are, the more frequently your own ad will be displayed. In other words, getting in early will give you more screen time than waiting! This applies to all content creators - artists, fursuiters/murrsuiters, youtubers, etc. The free trial lasts for one month. We reserve the right to not offer the trial if the content being advertised seems to be of questionable quality.
           </p>
         </div>
       </div>
@@ -60,118 +60,42 @@
         </router-link>
       </div>
 
-      <div class="adType mt-32">
-        <div style="width: fit-content; padding-right: 1rem;">
-          <h2>Ad type: Comic card</h2>
-          <p>
-            Your ad will appear at random in the same style as comics in the <a href="https://yiffer.xyz/" class="underline-link">main page</a>.
-          </p>
+      <h2 class="mt-48">Ad types</h2>
+      <p class="mt-0 mb-8">Click an ad type for more info</p>
 
-          <p class="adMiniHeader">
-            Prices
-          </p>
 
-          <p v-if="!paidImagePrices.fetched">
-            Fetching prices...
-          </p>
-          <span v-else>
-            <p v-for="price in paidImagePrices.payload.card" :key="price.durationMonths">
-              {{price.durationMonths}} month{{price.durationMonths !== 1 ? 's' : ''}}: <b v-if="price.discountedPrice === null">${{price.price/price.durationMonths}} per month</b>
-              <b v-else>FREE!</b>
-              (${{price.discountedPrice !== null ? price.discountedPrice : price.price}} total)
-            </p>
-          </span>
 
-          
-          <p class="adMiniHeader">
-            Details
+      <div class="piSummaryContainer"> 
+        <div v-for="adInfo in adInfos"
+             class="piSummary box smallerBox"
+             :class="{piSummarySelected: adTypeShown === adInfo.adName}"
+             @click="adTypeShown = adInfo.adName"
+             :key="adInfo.adName">
+          <p class="themeColorTextDarker">
+            {{adInfo.header}}
           </p>
           <p>
-            Title: up to 25 characters
+            {{adInfo.dimensions}}
           </p>
           <p>
-            Secondary text: optional, up to 60 characters
+            {{getPriceString(adInfo.adName)}}
           </p>
-
-          <p class="adMiniHeader">
-            Media
-          </p>
-          <p>
-            Format: JPG, PNG, or GIF. Two sizes must be submitted. It is probably wise to submit two different images/gifs, as mobile "cards" are much smaller than desktop ones, and images appropriate for one card size might not be as good for the other. The ratio is the same, so you may submit the same image, only resized, if you wish.
-          </p>
-          <p class="mt-12">
-            Sizes: 200x283 pixels for the big version, and 100x141 pixels for the small one. Both must be submitted.
-          </p>
-        </div>
-        <div class="imgContainer" v-if="$breakpoint.mdAndUp">
-          <img src="https://i.imgur.com/ElMTmzs.png" />
-          <img src="https://i.imgur.com/5mI8uIl.png" />
-        </div>
-        <div class="imgContainerSmall" v-else>
-          <img v-if="cardAdType === 'mobile'" src="https://i.imgur.com/ElMTmzs.png" class="cardImgSmall"/>
-          <img v-if="cardAdType === 'desktop'" src="https://i.imgur.com/5mI8uIl.png" class="cardImgBig"/>
-          <p class="link-color cursorPointer underline-link mt-8"
-            @click="cardAdType = (cardAdType === 'desktop' ? 'mobile' : 'desktop')">
-            Show {{cardAdType === 'desktop' ? 'mobile' : 'desktop'}} version
-          </p>
-        </div>
+        </div>  
       </div>
 
+      <AdTopSmall v-if="adTypeShown === 'topSmall'"/>
 
-      <div class="adType mt-32">
-        <div style="width: fit-content; padding-right: 1rem;">
-          <h2>Ad type: Comic banner</h2>
-          <p>
-            Your ad will be displayed above comics, between the title/tags and the first page. This placement is very eye-catching, hence the higher price. Every comic will have an ad displayed above it. The dimensions are the same as FurAffinity's banners, so you can reuse your ads from there!
-          </p>
+      <AdComicCard v-if="adTypeShown === 'card'"/>
 
-          <p class="adMiniHeader">
-            Prices
-          </p>
-
-          <p v-if="!paidImagePrices.fetched">
-            Fetching prices...
-          </p>
-          <span v-else>
-            <p v-for="price in paidImagePrices.payload.banner" :key="price.durationMonths">
-              {{price.durationMonths}} month{{price.durationMonths !== 1 ? 's' : ''}}: <b v-if="price.discountedPrice === null">${{price.price/price.durationMonths}} per month</b>
-              <b v-else>FREE!</b>
-              (${{price.discountedPrice !== null ? price.discountedPrice : price.price}} total)
-            </p>
-          </span>
-          
-          <p class="adMiniHeader">
-            Details
-          </p>
-          <p>
-            This ad has no displayed text, but you can place a message in the image itself if so desired.
-          </p>
-
-          <p class="adMiniHeader">
-            Media
-          </p>
-          <p>
-            Format: JPG, PNG, or GIF. Make sure that the picture is visible when scaled down to the width of a mobile screen (rougly 370px, give or take). The maximum size, which must be submitted, is 728x90 pixels.
-          </p>
-        </div>
-
-        <div class="bannerImgContainer" v-if="$breakpoint.mdAndUp">
-          <img src="https://i.imgur.com/ixYeOYV.png" />
-          <img src="https://i.imgur.com/RDipCIf.png" />
-        </div>
-        <div class="imgContainerSmall" v-else>
-          <img v-if="cardAdType === 'mobile'" src="https://i.imgur.com/RDipCIf.png" class="bannerImgSmall"/>
-          <img v-if="cardAdType === 'desktop'" src="https://i.imgur.com/ixYeOYV.png" class="bannerImgBig"/>
-          <p class="link-color cursorPointer underline-link mt-8"
-            @click="cardAdType = (cardAdType === 'desktop' ? 'mobile' : 'desktop')">
-            Show {{cardAdType === 'desktop' ? 'mobile' : 'desktop'}} view
-          </p>
-        </div>
-      </div>
+      <AdBanner v-if="adTypeShown === 'banner'"/>
 
       <h2 class="mt-48">Additional information</h2>
       <p>
-        The ads may be suggestive, but no genitals should be shown. Media including content that is commonly frowned upon will be rejected. Censored pictures are allowed. If you're uncertain, feel free to ask us at advertising@yiffer.xyz in advance.
+        All pictures (JPG and PNG) will be converted to WebP with minimal loss, with JPG as fallback. All GIFs will be converted to WebM with minimal loss, with MP4 as backup. This is done to save user data and speed up the page load, as these formats are much more lightweight. If this conversion results in an unacceptable loss in quality for your specific ad, please contact us and we will honor your request to have your ad skip the conversion and be displayed in its original format.
+      </p>
+
+      <p>
+        The ads may be suggestive, but no excessive lewdness. Genitals are not strictly forbidden, but keep it tasteful. Media including content that is commonly frowned upon will be rejected. Censored pictures are allowed. If you're uncertain, feel free to ask us at advertising@yiffer.xyz in advance.
       </p>
 
       <p>
@@ -179,11 +103,11 @@
       </p>
 
       <p>
-        Each price is for a single ad with a single image/gif. It is perfectly fine to apply several times with different images/gifs. These will be treated as separate ads and you will have to pay for each one. If you've paid for two ads and there are ten in total, about two out of every ten ads displayed will be yours.
+        Each price is for a single ad with a single image/gif. It is perfectly fine to apply several times with different images/gifs. You may also upload the same picture/gif if you want your ad to show up more frequently. These will be treated as separate ads and you will have to pay for each one. If you've paid for two ads and there are ten in total, about two out of every ten ads displayed will be yours.
       </p>
 
       <p>
-        As we don't have any experience with advertisers yet, our prices may change in the future. If you have paid for an X-month commitment, you will not be affected by these changes for the duration of your commitment.
+        Our prices may change in the future. If you have paid for an X-month commitment, you will not be affected by these changes for the duration of your commitment.
       </p>
 
       <p>
@@ -224,13 +148,36 @@ import miscApi from '@/api/miscApi'
 import adApi from '@/api/advertisingApi'
 import { doFetch } from '@/utils/statefulFetch'
 
+import AdBanner from './AdBanner.vue'
+import AdComicCard from './AdComicCard.vue'
+import AdTopSmall from './AdTopSmall.vue'
+
 import RightArrow from 'vue-material-design-icons/ArrowRight.vue'
 import { mapGetters } from 'vuex'
+
+const adInfos = [
+  {
+    header: 'Ad at the top of page',
+    dimensions: '300x90 px (same as FA)',
+    adName: 'topSmall'
+  },
+  {
+    header: 'Banner above comics',
+    dimensions: '728x90 px (same as FA/e621)',
+    adName: 'banner'
+  },
+  {
+    header: 'Ad as comic card',
+    dimensions: '200x283 px',
+    adName: 'card'
+  },
+]
 
 export default {
   name: 'advertising',
   
   components: {
+    AdBanner, AdComicCard, AdTopSmall,
     RightArrow,
   },
 
@@ -242,7 +189,8 @@ export default {
 
   data () {
     return {
-      cardAdType: 'desktop',
+      adTypeShown: null,
+      adInfos,
     }
   },
 
@@ -257,6 +205,20 @@ export default {
     showLoginModal () {
       this.$store.commit('setLoginModalVisibility', true)
     },
+
+    getPriceString (adType) {
+      if (!this.paidImagePrices.fetched) { return '' }
+
+      let highestPrice = 0
+      let lowestPrice = 99999
+      this.paidImagePrices.payload[adType].forEach(adPrice => {
+        let price = adPrice.price / adPrice.durationMonths
+        if (price > highestPrice) { highestPrice = price }
+        if (price < lowestPrice) { lowestPrice = price }
+      })
+
+      return `$${highestPrice}-$${lowestPrice} / month`
+    }
   },
 
   metaInfo () {
@@ -274,7 +236,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "@/scss/shadows.scss";
 .upperLoginButton {
   margin-top: 1rem;
@@ -330,6 +292,9 @@ export default {
 
 .themeColorText {
   color: $themeGreen2Darker;
+}
+.themeColorTextDarker {
+  color: $themeGreen2Darker2;
 }
 
 .adMiniHeader {
@@ -461,13 +426,54 @@ export default {
   }
 }
 
+.piSummaryContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  @media (max-width: 900px) {
+    gap: 1rem;
+  }
+}
+
+.smallerBox {
+  padding: 0.5rem 0.75rem;
+  @media (max-width: 900px) {
+    padding: 0.3rem 0.5rem;
+  }
+}
+
+.piSummary {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  align-items: center;
+  border: 4px solid transparent;
+  p:first-child {
+    font-size: 1.15rem;
+    font-weight: 400;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.piSummarySelected {
+  border: 4px solid $themeGreen2Darker;
+}
+
 .dark {
   .box {
     background-color: $themeDark1;
     box-shadow: 0 4px 24px rgba(33, 33, 33, 0.5);
   }
-  .themeColorText {
+  .themeColorText, .themeColorTextDarker {
     color: $themeGreen2Dark;
+  }
+  .piSummarySelected {
+    border-color: $themeGreen2Darker;
   }
 }
 </style>

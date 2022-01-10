@@ -1,5 +1,4 @@
 module.exports = {
-publicPath: '/',
   devServer: {
     proxy: 'http://localhost:8012',
     https: false,
@@ -9,7 +8,7 @@ publicPath: '/',
   css: {
     loaderOptions: {
       sass: {
-        prependData: `@import "@/scss/colors.scss";`
+        additionalData: `@import "@/scss/colors.scss";`
       }
     }
   },
