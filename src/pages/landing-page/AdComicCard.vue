@@ -36,12 +36,12 @@
     </p>
   </div>
   <div class="imgContainer" v-if="$breakpoint.mdAndUp">
-    <img src="https://i.imgur.com/ElMTmzs.png" />
-    <img src="https://i.imgur.com/5mI8uIl.png" />
+    <img src="pi-images/card-mobile.jpg" />
+    <img src="pi-images/card-desktop.jpg" />
   </div>
   <div class="imgContainerSmall" v-else>
-    <img v-if="adType === 'mobile'" src="https://i.imgur.com/ElMTmzs.png" class="cardImgSmall"/>
-    <img v-if="adType === 'desktop'" src="https://i.imgur.com/5mI8uIl.png" class="cardImgBig"/>
+    <img v-if="adType === 'mobile'" src="pi-images/card-mobile.jpg" class="cardImgSmall"/>
+    <img v-if="adType === 'desktop'" src="pi-images/card-desktop.jpg" class="cardImgBig"/>
     <p class="link-color cursorPointer underline-link mt-8"
       @click="adType = (adType === 'desktop' ? 'mobile' : 'desktop')">
       Show {{adType === 'desktop' ? 'mobile' : 'desktop'}} version

@@ -26,16 +26,16 @@
       Details
     </p>
     <p>
-      Size: <u>300x90 pixels</u>. Format: JPG, PNG, or GIF. This media is always displayed in this resolution - no downscaling on phones.
+      Size: <u>300x90 pixels</u>. This is the same as one of FurAffinity's ad types. Format: JPG, PNG, or GIF. This media is always displayed in this resolution - no downscaling on phones.
     </p>
   </div>
-  <div class="imgContainer" v-if="$breakpoint.mdAndUp">
-    <img src="https://i.imgur.com/ElMTmzs.png" />
-    <img src="https://i.imgur.com/5mI8uIl.png" />
+  <div class="bannerImgContainer" v-if="$breakpoint.mdAndUp">
+    <img src="pi-images/top-page-desktop.jpg" />
+    <img src="pi-images/top-page-mobile.jpg" />
   </div>
   <div class="imgContainerSmall" v-else>
-    <img v-if="adType === 'mobile'" src="https://i.imgur.com/ElMTmzs.png" class="cardImgSmall"/>
-    <img v-if="adType === 'desktop'" src="https://i.imgur.com/5mI8uIl.png" class="cardImgBig"/>
+    <img v-if="adType === 'mobile'" src="pi-images/top-page-mobile.jpg" class="bannerImgSmall"/>
+    <img v-if="adType === 'desktop'" src="pi-images/top-page-desktop.jpg" class="bannerImgBig"/>
     <p class="link-color cursorPointer underline-link mt-8"
       @click="adType = (adType === 'desktop' ? 'mobile' : 'desktop')">
       Show {{adType === 'desktop' ? 'mobile' : 'desktop'}} version

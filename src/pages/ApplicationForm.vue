@@ -19,14 +19,14 @@
       </p>
 
       <p>
-        It may take a few days to get your ad approved, as well as for us to register your payment afterwards. In the near future, we aim to automate the payment process by creating a solution where you can pay by credit card instead. This will eliminate the need for manual payment review.
+        It may take a few days to get your ad approved, as well as for us to register your payment afterwards. In the future, we aim to automate the payment process by creating a solution where you can pay by credit card instead. This will eliminate the need for manual payment review.
       </p>
 
       <p>
         <b>
           If you are eligible for a free discount, we'll skip the "awaiting payment" step. This means that we'll activate your ad as soon as it looks good. You'll receive an email when your ad has been activated.
         </b>
-          If you are not eligible for a free discount, your ad will go directly to the "awaiting payment" stage after being approved. Note that the requirements for getting a free discount have changed lately - see the fourth box on the previous page for more details.
+          If you are not eligible for a free discount, your ad will go directly to the "awaiting payment" stage after being approved. See the fourth box on the previous page for eligibility details.
       </p>
     </div>
 

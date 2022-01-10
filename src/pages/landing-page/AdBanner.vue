@@ -25,17 +25,17 @@
       Details
     </p>
     <p>
-      Size: <u>728x90 pixels</u>. Format: JPG, PNG, or GIF. Keep in mind that on phones, the media will be scaled down to fit the screen - roughly half of its original size, give or take.
+      Size: <u>728x90 pixels</u>. This is the same resolution used on both FurAffinity and e621. Format: JPG, PNG, or GIF. Keep in mind that on phones, the media will be scaled down to fit the screen - roughly half of its original size, give or take.
     </p>
   </div>
 
   <div class="bannerImgContainer" v-if="$breakpoint.mdAndUp">
-    <img src="https://i.imgur.com/ixYeOYV.png" />
-    <img src="https://i.imgur.com/RDipCIf.png" />
+    <img src="pi-images/banner-desktop.jpg" />
+    <img src="pi-images/banner-mobile.jpg" />
   </div>
   <div class="imgContainerSmall" v-else>
-    <img v-if="adType === 'mobile'" src="https://i.imgur.com/RDipCIf.png" class="bannerImgSmall"/>
-    <img v-if="adType === 'desktop'" src="https://i.imgur.com/ixYeOYV.png" class="bannerImgBig"/>
+    <img v-if="adType === 'mobile'" src="pi-images/banner-mobile.jpg" class="bannerImgSmall"/>
+    <img v-if="adType === 'desktop'" src="pi-images/banner-desktop.jpg" class="bannerImgBig"/>
     <p class="link-color cursorPointer underline-link mt-8"
       @click="adType = (adType === 'desktop' ? 'mobile' : 'desktop')">
       Show {{adType === 'desktop' ? 'mobile' : 'desktop'}} view
@@ -58,7 +58,7 @@ export default {
 
   data () {
     return {
-      adType: 'desktop'
+      adType: 'desktop',
     }
   }
 }

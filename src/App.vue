@@ -16,7 +16,7 @@
           <router-link 
             class="navlink"
             :to="{ name: 'landingPage' }">
-            {{$breakpoint.smAndDown ? 'Ads' : 'Advertising'}}
+            {{$breakpoint.smAndDown ? 'Info' : 'Info & apply'}}
           </router-link>
 
           <router-link 

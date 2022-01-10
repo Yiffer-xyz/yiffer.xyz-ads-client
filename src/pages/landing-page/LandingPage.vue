@@ -19,7 +19,7 @@
             40,000+ daily visitors
           </h3>
           <p>
-            As of January 2022, about 40,000 people are visiting Yiffer.xyz every day. We record the number of clicks your ads get and display this in a dashboard, so you can see and decide for yourself whether to keep going after your first months.
+            As of January 2022, about 40,000 people are visiting Yiffer.xyz every day. We record the number of clicks your ads get and display this in a neat little dashboard, so you can see and decide for yourself whether to keep going after your first months.
           </p>
         </div>
         <div class="box">
@@ -31,11 +31,11 @@
           </p>
         </div>
         <div class="box">
-          <h3>
-            Get in early - <span class="themeColorText">FREE trial for creators!</span>
+          <h3 class="themeColorText">
+            FREE trial for creators!
           </h3>
           <p>
-            We're offering 100% discounts on all ad types <i>for creators only</i>! Not only is it free, you should also keep in mind that the fewer advertisers there are, the more frequently your own ad will be displayed. In other words, getting in early will give you more clicks than waiting! This applies to all content creators - artists, fursuiters/murrsuiters, youtubers, etc. The free trial lasts for one month. We reserve the right to not offer the trial if the content being advertised seems to be of questionable quality.
+            We're offering 100% discounts on all ad types <i>for creators only</i>! Not only is it free, you should also keep in mind that the fewer advertisers there are, the more frequently your own ad will be displayed. In other words, getting in early will give you more screen time than waiting! This applies to all content creators - artists, fursuiters/murrsuiters, youtubers, etc. The free trial lasts for one month. We reserve the right to not offer the trial if the content being advertised seems to be of questionable quality.
           </p>
         </div>
       </div>
@@ -91,11 +91,11 @@
 
       <h2 class="mt-48">Additional information</h2>
       <p>
-        All pictures (JPG and PNG) will be converted to WebP with minimal loss. All GIFs will be converted to WebM without loss. This is done to save user data and speed up the page load, as these formats are much more lightweight.
+        All pictures (JPG and PNG) will be converted to WebP with minimal loss, with JPG as fallback. All GIFs will be converted to WebM with minimal loss, with MP4 as backup. This is done to save user data and speed up the page load, as these formats are much more lightweight. If this conversion results in an unacceptable loss in quality for your specific ad, please contact us and we will honor your request to have your ad skip the conversion and be displayed in its original format.
       </p>
 
       <p>
-        The ads may be suggestive, but no excessive lewdness. Genitals are allowed, but keep it tasteful. Media including content that is commonly frowned upon will be rejected. Censored pictures are allowed. If you're uncertain, feel free to ask us at advertising@yiffer.xyz in advance.
+        The ads may be suggestive, but no excessive lewdness. Genitals are not strictly forbidden, but keep it tasteful. Media including content that is commonly frowned upon will be rejected. Censored pictures are allowed. If you're uncertain, feel free to ask us at advertising@yiffer.xyz in advance.
       </p>
 
       <p>
@@ -157,11 +157,6 @@ import { mapGetters } from 'vuex'
 
 const adInfos = [
   {
-    header: 'Ad as comic card',
-    dimensions: '200x283 px',
-    adName: 'card'
-  },
-  {
     header: 'Ad at the top of page',
     dimensions: '300x90 px (same as FA)',
     adName: 'topSmall'
@@ -170,7 +165,12 @@ const adInfos = [
     header: 'Banner above comics',
     dimensions: '728x90 px (same as FA/e621)',
     adName: 'banner'
-  }
+  },
+  {
+    header: 'Ad as comic card',
+    dimensions: '200x283 px',
+    adName: 'card'
+  },
 ]
 
 export default {
