@@ -35,7 +35,18 @@
             FREE trial for creators!
           </h3>
           <p>
-            We're offering 100% discounts on all ad types <i>for creators only</i>! Not only is it free, you should also keep in mind that the fewer advertisers there are, the more frequently your own ad will be displayed. In other words, getting in early will give you more screen time than waiting! This applies to all content creators - artists, fursuiters/murrsuiters, youtubers, etc. The free trial lasts for one month. We reserve the right to not offer the trial if the content being advertised seems to be of questionable quality.
+            We're offering one of two discounts on any ad type <i>for creators only</i>:
+          </p>
+          <ul>
+            <li>
+              You can get your first month free without any commitment required, or:
+            </li>
+            <li>
+              You can get a 50% discount on your first four months if you commit to the 4-month ad type straight away.
+            </li>
+          </ul>
+          <p class="mt-12">
+            This applies to all content creators, but not things like discord servers. Only one trial/discount per advertiser.
           </p>
         </div>
       </div>
@@ -112,6 +123,10 @@
 
       <p>
         Gifs must not have rapidly flashing lights or colors.
+      </p>
+
+      <p>
+         For the free trials and discounts, we reserve the right to not offer it if the content being advertised seems to be of questionable quality.
       </p>
 
       <p>

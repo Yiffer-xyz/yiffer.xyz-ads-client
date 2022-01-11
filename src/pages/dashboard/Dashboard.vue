@@ -27,11 +27,13 @@
         <p class="mt-16">
           It may take a few days to get your ad approved, as well as for us to register your payment afterwards. In the near future, we aim to automate the payment process by creating a solution where you can pay by credit card instead. This will eliminate the need for manual payment review.
         </p>
-          
-        <p class="mt-16">
-          <b>
-            If you qualify for a free one-month discount, we'll skip the "awaiting payment" step. This means that we'll activate your ad as soon as it looks good. You'll receive an email when your ad has been activated.
-          </b>
+            
+        <h3 class="mt-16">
+          Free trials / discounts
+        </h3>
+
+        <p>
+          If this is your first ad, and you have indicated that you wish to get a 50% discount on your first four months, and your ad is in the <span class="monoWarning">AWAITING PAYMENT</span> state: Pay 50% of the 4-month duration price, and to make it easier on us, please note that you're using the 4-month discount in the PayPal message field, in addition to your ad's ID.
         </p>
       </div>
 

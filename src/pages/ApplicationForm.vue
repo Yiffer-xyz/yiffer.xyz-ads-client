@@ -22,11 +22,20 @@
         It may take a few days to get your ad approved, as well as for us to register your payment afterwards. In the future, we aim to automate the payment process by creating a solution where you can pay by credit card instead. This will eliminate the need for manual payment review.
       </p>
 
+      <h3 class="mt-16">
+        Free trials / discounts
+      </h3>
+
       <p>
-        <b>
-          If you are eligible for a free discount, we'll skip the "awaiting payment" step. This means that we'll activate your ad as soon as it looks good. You'll receive an email when your ad has been activated.
-        </b>
-          If you are not eligible for a free discount, your ad will go directly to the "awaiting payment" stage after being approved. See the fourth box on the previous page for eligibility details.
+        If this is your first ad and you are a content creator, you may use one of our two free trials offered.
+      </p>
+
+      <p>
+        If you wish to get your first month for free, you need only create your ad, and we will immediately activate your ad, skipping the "awaiting payment" step. You can write that you wish the one-month trial in the "notes or comments for our staff" field if you'd like. You will receive an email when your ad has been activated.
+      </p>
+
+      <p>
+        <u>Important!</u> If you wish to get a 50% discount on your first four months instead, you <u>must</u> write this in the "notes or comments for our staff" field. We will then assign your ad the "awaiting payment" status, and you will then pay 50% of the four-month price.
       </p>
     </div>
 
