@@ -1,7 +1,7 @@
 {
   "apiBaseUrl": "/api",
-  "paidImagesBaseUrl": "https://static.yiffer.xyz/pi",
-  "cookieConfig": ["60d"],
+  "paidImagesBaseUrl": "https://static-beta.yiffer.xyz/pi",
+  "cookieConfig": ["60d", "", ".yiffer.xyz", false],
   "adTypeInfos": {
     "card": { "displayName": "Comic card", "resolution": "200x283" },
     "banner": { "displayName": "Comic banner", "resolution": "728x90" },
