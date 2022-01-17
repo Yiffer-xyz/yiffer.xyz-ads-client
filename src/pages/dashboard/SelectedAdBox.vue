@@ -85,7 +85,7 @@
               style="max-width: 100%;">
       </picture>
 
-      <video v-else-if="ad.filetype === 'webm'" autoplay muted loop style="max-width: 100%;" :key="ad.id">
+      <video v-else-if="ad.filetype === 'webm'" autoplay muted loop playsinline webkit-playsinline style="max-width: 100%;" :key="ad.id">
         <source :src="`${config.paidImagesBaseUrl}/${ad.id}.webm`"
                 type="video/webm">
         <source :src="`${config.paidImagesBaseUrl}/${ad.id}.mp4`"

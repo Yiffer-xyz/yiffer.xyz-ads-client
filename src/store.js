@@ -20,8 +20,8 @@ const store = {
     },
 
     async checkAndSetLoginStatus ({commit, dispatch}) {
-      if ($cookies.isKey('user-data')) {
-        commit('setUserData', $cookies.get('user-data'))
+      if ($cookies.isKey('yiffer_userdata')) {
+        commit('setUserData', $cookies.get('yiffer_userdata'))
         commit('setIsAuthenticated', true)
         dispatch('refreshUserData')
         return true
@@ -47,13 +47,11 @@ const store = {
     setUserData (context, userData) {
       context.commit('setUserData', userData)
       context.commit('setIsAuthenticated', true)
-      $cookies.set('user-data', userData)
     },
 
     destroyUserData (context) {
       context.commit('setUserData', undefined)
       context.commit('setIsAuthenticated', false)
-      $cookies.remove('user-data')
     },
   },
 
